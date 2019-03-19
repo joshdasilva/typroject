@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+   <!-- Fixed navbar -->
+
+
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand" href="#">PredictX</a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+         <ul class="navbar-nav mr-auto">
+         </ul>
+         <form class="form-inline mt-2 mt-md-0">
+             <select class="selectpicker" data-live-search="true" id="mySelect" onchange="dChanged()">
+            {% block content %}
+            {% for stc in stocks %}
+              <option data-tokens="{{stc.stock_title}}">{{stc.stock_name}}</option>
+            {% endfor %}
+             </select>
+            <li class="nav-item text-nowrap">
+               <a type="button" class="btn btn-sm btn-outline-secondary" href="logout">Sign out</a>
+            </li>
+         </form>
+      </div>
+   </nav>
+
+<script>
+function dChanged() {
+  var x = document.getElementById("mySelect").value;
+  document.getElementById("demo").innerHTML = "Latest Time Series for " + x;
+  document.getElementById("demo1").innerHTML = "Price Prediction for 14/03/2019 to 21/03/2019 for "+ x;
+  document.getElementById("demo2").innerHTML = x+"'s Description";
+  document.getElementById("demo3").innerHTML = "Latest News for "+x;
+}
+</script>
+   
+   
+   <head>
+      {% load static %}   
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.6/dist/css/bootstrap-select.min.css">
+      <link href="{% static 'predictx/scripts/dashboard.css' %}" rel="stylesheet">
+      <title>Predictstocks.net</title>
+      <link rel="shortcut icon" type="image/png" href="{% static 'predictx/images/favicon.ico' %}"/>
+   </head>
+
+   
+   <body>
+
+
+
+	  
+	  <div class="container-fluid">
+      <div class="row">
+         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+               <ul class="nav flex-column">
+                  <li class="nav-item">
+                     <a class="nav-link active" href="#">
+                     <span data-feather="home"></span>
+                     Favourites  <span class="sr-only">(current)</span>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                     <span data-feather="file"></span>
+                     Apple
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                     <span data-feather="shopping-cart"></span>
+                     Tesla
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                     <span data-feather="users"></span>
+                     Samsung
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                     <span data-feather="bar-chart-2"></span>
+                     Walmart
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                     <span data-feather="layers"></span>
+                     Exxon Mobil
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </nav>
+		 
+		 
+		 
+         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+                <h1 id="demo" class="h2">Latest Time Series for Apple Inc.</h1>
+               <div class="btn-toolbar mb-2 mb-md-0">
+                  <div class="btn-group mr-2">
+                     <button type="button" class="btn btn-sm btn-outline-secondary">Add to Favorites</button>  
+                  </div>
+               </div>
+            </div>
+            <canvas class="chartjs-render-monitor" id="myChart" width="900" height="380"></canvas>
+            <div class=row>
+
+               <h2 id="demo1" class="h2">Price Prediction for 14/03/2019 to 21/03/2019 for Apple Inc.</h2>
+               <p>
+                  <canvas class="chartjs-render-monitor" id="myChart2" width="900" height="380"></canvas>
+               </p>
+               <div class="table-responsive">
+                  <table class="table table-striped table-sm">
+                     <thead>
+                        <tr>
+                           <th>Date</th>
+                           <th>Predicted price</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>01/03/2019</td>
+                           <td>150</td>
+                        </tr>
+                        <tr>
+                           <td>02/03/2019</td>
+                           <td>140</td>
+                        </tr>
+                        <tr>
+                           <td>03/03/2019</td>
+                           <td>180</td>
+                        </tr>
+                        <tr>
+                           <td>04/03/2019</td>
+                           <td>160</td>
+                        </tr>
+                        <tr>
+                           <td>05/03/2019</td>
+                           <td>155</td>
+                        </tr>
+                        <tr>
+                           <td>06/03/2019</td>
+                           <td>145</td>
+                        </tr>
+                        <tr>
+                           <td>07/03/2019</td>
+                           <td>155</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <h2 id="demo2" class="h2">Apple Inc.'s Description</h2>
+               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <h2 id="demo3" class="h2">Latest News for Apple Inc.</h2>
+               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            </div>
+         </main>
+         </div>
+      </div>
+	  {% endblock %}
+	  </body>
+	  
+	  
+	  
+      <!-- Optional JavaScript -->
+      <script>
+         function onRefresh(chart) {
+         
+         	var t = Date.now();
+         	var data = chart.data.datasets[0].data;
+         	var last;
+         
+         	t -= t % 5000;
+         	if (data.length === 0) {
+         		data.push({ t: t - 5000, o: 99, h: 101, l: 98, c: 100 });
+         	}
+         	last = data[data.length - 1];
+         	if (t != last.t) {
+         		var c = last.c;
+         		last = { t: t, o: c, h: c, l: c, c: c };
+         		data.push(last);
+         	}
+         	last.c += Math.random() - 0.5;
+         	last.h = Math.max(last.h, last.c);
+         	last.l = Math.min(last.l, last.c);
+         }
+         
+         var config = {
+         	type: 'candlestick',
+         	data: {
+         		datasets: [{
+         			data: [],
+         			fractionalDigitsCount: 2
+         		}]
+         	},
+         	options: {
+         		title: {
+         			display: true,
+         			text: document.getElementById("mySelect").value,
+         		},
+         		legend: {
+         			display: false,
+         		},
+         		scales: {
+         			xAxes: [{
+         				type: 'realtime',
+         				realtime: {
+         					duration: 120000,
+         					refresh: 500,
+         					delay: 0,
+         					onRefresh: onRefresh
+         				}
+         			}]
+         		},
+         		tooltips: {
+         			position: 'nearest',
+         			intersect: false
+         		},
+         		animation: {
+         			duration: 0
+         		}
+         	}
+         };
+         
+         window.onload = function() {
+            feather.replace()
+         	var ctx = document.getElementById('myChart').getContext('2d');
+         	window.myChart = new Chart(ctx, config);
+         };
+                 
+      </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/bootstrap-select.min.js"></script>
+      <!-- javascript for charts.js -->
+      <script src="{% static 'predictx/scripts/dashboard.js' %}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/chartjs/chartjs-chart-financial@master/docs/Chart.Financial.js"></script>
+      <script src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.7.1/chartjs-plugin-streaming.min.js"></script>
+
+
+

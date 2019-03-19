@@ -1,0 +1,31 @@
+
+{% extends 'predictx/base.html' %}
+{% load crispy_forms_tags%}
+
+
+{% block content %}
+
+  <div class="cover-container d-no-flex h-100 p-3 mx-auto no-flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Predictx</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link active" href="/register">Sign Up</a>
+            <a class="nav-link" href="/login">Login</a>
+          </nav>
+        </div>
+      </header>
+    <form method="POST">
+        <br>
+        <br>
+        <br>
+        {% csrf_token %}
+        {{form|crispy}}
+        <button style="background-color:#2196f3; color:#e3f2fd" class="btn btn-raised btn-succes" type="submit">Sign Up</button>
+    </form>
+
+    If you already have an account <a href="/login" target="blank"><strong>login</strong></a> instead.
+
+  </div>
+{% endblock %}
