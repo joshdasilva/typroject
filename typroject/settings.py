@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['www.predictstocks.net', 'predictstocks.net', '*.predictstocks.
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'predictx.apps.PredictxConfig',
     #'predictx',
     'django.contrib.admin',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #third party apps
     'crispy_forms',
+
 
 ]
 
