@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1697c0f8-7ab8-480f-814f-e123d8d18345" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard2.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+            <state relative-caret-position="442">
+              <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -195,7 +190,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -399,7 +394,7 @@
       <workItem from="1554207594358" duration="16062000" />
       <workItem from="1554330852549" duration="2850000" />
       <workItem from="1554333765622" duration="10927000" />
-      <workItem from="1554382959765" duration="32430000" />
+      <workItem from="1554382959765" duration="32687000" />
     </task>
     <task id="LOCAL-00001" summary="mega update">
       <created>1552956220640</created>
@@ -412,7 +407,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157700000" />
+    <option name="totallyTimeSpent" value="157957000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -775,8 +770,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        <state relative-caret-position="442">
+          <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
         </state>
       </provider>
     </entry>
