@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+   <!-- Fixed navbar -->
+
+
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand" href="#">PredictX</a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+         <ul class="navbar-nav mr-auto">
+         </ul>
+         <form class="form-inline mt-2 mt-md-0">
+             <select class="selectpicker" data-live-search="true" id="mySelect" onchange="dChanged()">
+            {% block content %}
+            {% for stc in stocks %}
+              <option data-tokens="{{stc.stock_name}}">{{stc.stock_title}}</option>
+            {% endfor %}
+             {% endblock %}
+             </select>
+            <li class="nav-item text-nowrap">
+               <a type="button" class="btn btn-sm btn-outline-secondary" href="logout">Sign out</a>
+            </li>
+         </form>
+      </div>
+   </nav>
+
+<script>
+function dChanged() {
+  var x = document.getElementById("mySelect").value;
+  //window.location = logout;
+  //document.location.href = x;
+    window.location.href = '/'+x;
+
+  document.getElementById("demo").innerHTML = "Latest Time Series for " + x;
+  document.getElementById("demo1").innerHTML = "Price Prediction for 14/03/2019 to 21/03/2019 for "+ x;
+  document.getElementById("demo2").innerHTML = x+"'s Description";
+  document.getElementById("demo3").innerHTML = "Latest News for "+x;
+}
+</script>
+   
+   
+   <head>
+      {% load static %}   
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.6/dist/css/bootstrap-select.min.css">
+      <link href="{% static 'predictx/scripts/dashboard.css' %}" rel="stylesheet">
+      <title>Predictstocks.net</title>
+      <link rel="shortcut icon" type="image/png" href="{% static 'predictx/images/favicon.ico' %}"/>
+
+       <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.css" rel="stylesheet" type="text/css">
+
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js"></script>
+<script src= "http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-api-1.0.4.min.js"></script>
+    {{ script | safe }}
+       {{ script2 | safe }}
+       {{ script3 | safe }}
+       {{ script4 | safe }}
+       {{ script5 | safe }}
+       {{ script6 | safe }}
+   </head>
+
+   <body>
+{%block symbol%}
+   {% endblock %}
+   </body>
+
+
+	  
+	  
+	  
+      <!-- Optional JavaScript -->
+      <script>
+         function onRefresh(chart) {
+         
+         	var t = Date.now();
+         	var data = chart.data.datasets[0].data;
+         	var last;
+         
+         	t -= t % 5000;
+         	if (data.length === 0) {
+         		data.push({ t: t - 5000, o: 99, h: 101, l: 98, c: 100 });
+         	}
+         	last = data[data.length - 1];
+         	if (t != last.t) {
+         		var c = last.c;
+         		last = { t: t, o: c, h: c, l: c, c: c };
+         		data.push(last);
+         	}
+         	last.c += Math.random() - 0.5;
+         	last.h = Math.max(last.h, last.c);
+         	last.l = Math.min(last.l, last.c);
+         }
+         
+         var config = {
+         	type: 'candlestick',
+         	data: {
+         		datasets: [{
+         			data: [],
+         			fractionalDigitsCount: 2
+         		}]
+         	},
+         	options: {
+         		title: {
+         			display: true,
+         			text: document.getElementById("mySelect").value,
+         		},
+         		legend: {
+         			display: false,
+         		},
+         		scales: {
+         			xAxes: [{
+         				type: 'realtime',
+         				realtime: {
+         					duration: 120000,
+         					refresh: 500,
+         					delay: 0,
+         					onRefresh: onRefresh
+         				}
+         			}]
+         		},
+         		tooltips: {
+         			position: 'nearest',
+         			intersect: false
+         		},
+         		animation: {
+         			duration: 0
+         		}
+         	}
+         };
+         
+         window.onload = function() {
+            feather.replace()
+         	var ctx = document.getElementById('myChart').getContext('2d');
+         	window.myChart = new Chart(ctx, config);
+         };
+      </script>
+
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/bootstrap-select.min.js"></script>
+   <!-- javascript for charts.js -->
+   <script src="{% static 'predictx/scripts/dashboard.js' %}"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/gh/chartjs/chartjs-chart-financial@master/docs/Chart.Financial.js"></script>
+   <script src="https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.7.1/chartjs-plugin-streaming.min.js"></script>
+
+
+

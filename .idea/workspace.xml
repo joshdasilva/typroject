@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1697c0f8-7ab8-480f-814f-e123d8d18345" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard2.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +45,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predictx/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
+            <state relative-caret-position="221">
               <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
@@ -52,20 +54,47 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/AAPL.html">
+        <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard_backup.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1156">
-              <caret line="18" column="25" lean-forward="true" selection-end-line="119" />
+            <state relative-caret-position="272">
+              <caret line="16" column="9" selection-end-line="106" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT_backup.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="26" column="39" selection-end-line="194" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard_backup.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -73,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="63" column="27" lean-forward="true" selection-start-line="63" selection-start-column="27" selection-end-line="63" selection-end-column="27" />
+            <state relative-caret-position="391">
+              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
             </state>
           </provider>
         </entry>
@@ -93,10 +122,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
-        <option value="HTML File" />
         <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -110,6 +139,7 @@
       <find>demo</find>
       <find>block</find>
       <find>FusionTable</find>
+      <find>side</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -146,7 +176,6 @@
         <option value="$PROJECT_DIR$/predictx/templates/predictx/index.html" />
         <option value="$PROJECT_DIR$/predictx/templates/predictx/base.html" />
         <option value="$PROJECT_DIR$/predictx/static/predictx/scripts/cover.css" />
-        <option value="$PROJECT_DIR$/predictx/templates/predictx/symbols/AAPL.html" />
         <option value="$PROJECT_DIR$/predictx/templates/predictx/AAPL.html" />
         <option value="$PROJECT_DIR$/predictx/fusioncharts1.py" />
         <option value="$PROJECT_DIR$/typroject/settings.py" />
@@ -155,9 +184,14 @@
         <option value="$PROJECT_DIR$/predictx/urls.py" />
         <option value="$PROJECT_DIR$/predictx/static/predictx/scripts/bokeh.min.css.js" />
         <option value="$PROJECT_DIR$/predictx/stockfetch.py" />
-        <option value="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" />
         <option value="$PROJECT_DIR$/predictx/views.py" />
+        <option value="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT2.html" />
+        <option value="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard2.css" />
+        <option value="$PROJECT_DIR$/predictx/templates/predictx/dashboard2.html" />
+        <option value="$PROJECT_DIR$/predictx/templates/predictx/symbols/AAPL.html" />
         <option value="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html" />
+        <option value="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" />
+        <option value="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css" />
       </list>
     </option>
   </component>
@@ -365,7 +399,7 @@
       <workItem from="1554207594358" duration="16062000" />
       <workItem from="1554330852549" duration="2850000" />
       <workItem from="1554333765622" duration="10927000" />
-      <workItem from="1554382959765" duration="23258000" />
+      <workItem from="1554382959765" duration="32430000" />
     </task>
     <task id="LOCAL-00001" summary="mega update">
       <created>1552956220640</created>
@@ -378,7 +412,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148528000" />
+    <option name="totallyTimeSpent" value="157700000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -390,15 +424,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.19722815" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.28118163" />
       <window_info id="Structure" order="1" sideWeight="0.5005417" side_tool="true" weight="0.124200426" />
       <window_info id="Favorites" order="2" sideWeight="0.5005417" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.219935" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989059" visible="true" weight="0.22210066" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -406,7 +440,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010941" side_tool="true" weight="0.3249453" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010941" side_tool="true" visible="true" weight="0.22210066" />
       <window_info anchor="bottom" id="manage.py@typroject" order="11" weight="0.32932165" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4989059" weight="0.3206934" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32936078" />
@@ -516,13 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/cover.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="429">
@@ -598,13 +625,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/fusioncharts/integrations/django/fusioncharts-wrapper/fusioncharts.py" />
     <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/fusioncharts/integrations/django/samples/fusioncharts/fusioncharts.py" />
     <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/fusioncharts/integrations/django/samples/fusioncharts/models.py" />
@@ -666,23 +686,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predictx/stockfetch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/AAPL.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1156">
-          <caret line="18" column="25" lean-forward="true" selection-end-line="119" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/predictx/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
+        <state relative-caret-position="221">
           <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
           <folding>
             <element signature="e#0#65#0" expanded="true" />
@@ -690,17 +696,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard.html">
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="63" column="27" lean-forward="true" selection-start-line="63" selection-start-column="27" selection-end-line="63" selection-end-column="27" />
+        <state relative-caret-position="68">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="60" column="1" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1598">
+          <caret line="138" column="4" lean-forward="true" selection-start-line="138" selection-start-column="4" selection-end-line="138" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/AAPL.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/stockfetch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard_backup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT_backup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="26" column="39" selection-end-line="194" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard_backup.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="9" selection-end-line="106" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
         </state>
       </provider>
     </entry>
