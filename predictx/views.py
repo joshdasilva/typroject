@@ -13,23 +13,40 @@ from bokeh.embed import components
 from bokeh.models import DatetimeTickFormatter
 from pprint import pprint
 import pandas as pd
+import wikipedia
 
 
-def chart(request):
+def MSFT(request):
+    stock = 'MSFT'
+    wikiD = wikipedia.summary("microsoft", sentences=5)
+    return chart(stock, wikiD)
 
+def AAPL(request):
+    return render(request = request,
+                  template_name='predictx/symbols/AAPL.html',
+                  context = {"stocks":Stock.objects.all})
+
+def chart(stock, wikiD):
     API_KEY = '90L3VT3DI22ZCS83'
     ts = TimeSeries(key='API_KEY', output_format='pandas')
-    data, meta_data = ts.get_daily_adjusted(symbol='MSFT', outputsize='500')
+    data, meta_data = ts.get_daily_adjusted(symbol=stock, outputsize='full')
 
-    ti = TechIndicators(key='API_KEY', output_format='pandas')
-    data2, meta_data2 = ti.get_bbands(symbol='MSFT', interval='daily', time_period=10)
+    ts2 = TechIndicators(key='API_KEY', output_format='pandas')
+    data2, meta_data2 = ts2.get_bbands(symbol=stock, interval='daily', time_period=10)
 
-    #y= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415]
+    ts3 = TechIndicators(key='API_KEY', output_format='pandas')
+    data3, meta_data3 = ts3.get_rsi(symbol=stock, series_type = 'close', interval='daily')
+
+    ts4 = TechIndicators(key='API_KEY', output_format='pandas')
+    data4, meta_data4 = ts4.get_macd(symbol=stock,series_type = 'close', interval='daily')
+
     title = 'Latest prices for Microsoft Inc.'
 
     data.index = pd.to_datetime(data.index)
     data2.index = pd.to_datetime(data2.index)
-   # pprint(data2)
+    data3.index = pd.to_datetime(data3.index)
+    data4.index = pd.to_datetime(data4.index)
+
 
     p = figure(title= title ,
         x_axis_label= 'Date Time',
@@ -71,17 +88,22 @@ def chart(request):
 
 
     p.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p.line(data.index, data['4. close'], legend= 'MSFT in $', line_width = 2)
+    p.line(data.index, data['4. close'], legend= stock+' price in $', line_width = 2)
+
     p2.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p2.line(data2.index, data2['Real Middle Band'], legend= 'MSFT Middle band $', line_width = 2)
+    p2.line(data2.index, data2['Real Middle Band'], legend= stock+' Middle Bolinger Band$', line_width = 2)
+
     p3.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p3.line(data2.index, data2['Real Middle Band'], legend= 'MSFT Middle band $', line_width = 2)
+    p3.line(data3.index, data3['RSI'], legend= stock+' RSI', line_width = 2)
+
     p4.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p4.line(data2.index, data2['Real Middle Band'], legend= 'MSFT Middle band $', line_width = 2)
+    p4.line(data4.index, data4['MACD'], legend= stock+' MACD', line_width = 2)
+
     p5.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p5.line(data2.index, data2['Real Middle Band'], legend= 'MSFT Middle band $', line_width = 2)
+    p5.line(data2.index, data2['Real Middle Band'], legend= stock+' combo', line_width = 2)
+
     p6.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p6.line(data2.index, data2['Real Middle Band'], legend= 'MSFT Middle band $', line_width = 2)
+    p6.line(data2.index, data2['Real Middle Band'], legend= stock+' Predicted price in $', line_width = 2)
 
     #Store components
     script, div = components(p)
@@ -91,10 +113,11 @@ def chart(request):
     script5, div5 = components(p5)
     script6, div6 = components(p6)
 
+
     #Feed them to the Django template.
-    return render_to_response( 'predictx/symbols/MSFT.html',
+    return render_to_response( 'predictx/symbols/'+stock+'.html',
             {'script' : script , 'div' : div,'script2' : script2 , 'div2' : div2,'script3' : script3 , 'div3' : div3,'script4' : script4 , 'div4' : div4,'script5' : script5 , 'div5' : div5
-             ,'script6' : script6 , 'div6' : div6})
+             ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD, "stocks":Stock.objects.all})
 
 
 def AlphaVantage(symbol):
@@ -171,11 +194,6 @@ def AAPL(request):
                   template_name='predictx/symbols/AAPL.html',
                   context = {"stocks":Stock.objects.all})
 
-
-def MSFT(request):
-    return render(request = request,
-                  template_name='predictx/symbols/MSFT.html',
-                  context = {"stocks":Stock.objects.all})
 def AMZN(request):
     return render(request = request,
                   template_name='predictx/symbols/AMZN.html',
