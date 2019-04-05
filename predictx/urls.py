@@ -11,7 +11,7 @@ urlpatterns = [
     path("login/", views.login_request, name="login"),
 
     path("AAPL/", views.AAPL, name="AAPL"),
-    path("MSFT/", views.MSFT, name="MSFT"),
+    path("MSFT/", views.chart, name="MSFT"),
     path("AMZN/", views.AMZN, name="AMZN"),
     path("FB/", views.FB, name="FB"),
     path("BRK.B/", views.BRKB, name="BRK.B"),

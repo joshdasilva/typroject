@@ -49,6 +49,17 @@ function dChanged() {
       <link href="{% static 'predictx/scripts/dashboard.css' %}" rel="stylesheet">
       <title>Predictstocks.net</title>
       <link rel="shortcut icon" type="image/png" href="{% static 'predictx/images/favicon.ico' %}"/>
+
+       <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.css" rel="stylesheet" type="text/css">
+
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js"></script>
+<script src= "http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-api-1.0.4.min.js"></script>
+    {{ script | safe }}
+       {{ script2 | safe }}
    </head>
 
    <body>

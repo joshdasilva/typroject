@@ -50,20 +50,80 @@
 
          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-
-                <h1 id="demo" class="h2">Latest Time Series for Apple Inc.</h1>
+                <h1 id="demo" class="h2">Latest Time Series for Microsoft Inc.</h1>
                <div class="btn-toolbar mb-2 mb-md-0">
                   <div class="btn-group mr-2">
                      <button type="button" class="btn btn-sm btn-outline-secondary">Add to Favorites</button>
                   </div>
                </div>
             </div>
-            <canvas class="chartjs-render-monitor" id="myChart" width="900" height="380"></canvas>
-            <div class=row>
 
-               <h2 id="demo1" class="h2">Price Prediction for 14/03/2019 to 21/03/2019 for Apple Inc.</h2>
+             {{ div | safe }}
+
+             <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Bollinger Bands
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        {{ div2 | safe }}
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          RSI
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+      RSI Graph
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          MACD
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        MACD Graph
+      </div>
+    </div>
+  </div>
+</div>
+             <div class="card">
+    <div class="card-header" id="headingFour">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Combo
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+      Combo graph
+       </div>
+    </div>
+  </div>
+
+             <div class=row>
+               <h2 id="demo1" class="h2">Price Prediction for 14/03/2019 to 21/03/2019 for Microsoft Inc.</h2>
                <p>
-                  <canvas class="chartjs-render-monitor" id="myChart2" width="900" height="380"></canvas>
+                  {{ div2 | safe }}
                </p>
                <div class="table-responsive">
                   <table class="table table-striped table-sm">
@@ -105,9 +165,9 @@
                      </tbody>
                   </table>
                </div>
-               <h2 id="demo2" class="h2">MSFT Inc.'s Description</h2>
-               <p>Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook.The company's hardware products include the iPhone smartphone, the iPad tablet computer, the Mac personal computer, the iPod portable media player, the Apple Watch smartwatch, the Apple TV digital media player, and the HomePod smart speaker. Apple's software includes the macOS and iOS operating systems, the iTunes media player, the Safari web browser, and the iLife and iWork creativity and productivity suites, as well as professional applications like Final Cut Pro, Logic Pro, and Xcode. Its online services include the iTunes Store, the iOS App Store and Mac App Store, Apple Music, and iCloud.</p>
-              <h2 id="demo3" class="h2">Latest News for Apple Inc.</h2>
+               <h2 id="demo2" class="h2">Microsoft Inc.'s Description</h2>
+               <p>Mfst Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook.The company's hardware products include the iPhone smartphone, the iPad tablet computer, the Mac personal computer, the iPod portable media player, the Apple Watch smartwatch, the Apple TV digital media player, and the HomePod smart speaker. Apple's software includes the macOS and iOS operating systems, the iTunes media player, the Safari web browser, and the iLife and iWork creativity and productivity suites, as well as professional applications like Final Cut Pro, Logic Pro, and Xcode. Its online services include the iTunes Store, the iOS App Store and Mac App Store, Apple Music, and iCloud.</p>
+              <h2 id="demo3" class="h2">Latest News for Microsoft Inc.</h2>
                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
             </div>
          </main>
