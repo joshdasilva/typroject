@@ -1,6 +1,7 @@
 alpha-vantage==2.1.0
 appdirs==1.4.3
 beautifulsoup4==4.7.1
+bokeh==1.0.4
 certifi==2018.11.29
 chardet==3.0.4
 Django==2.1.7
@@ -12,9 +13,13 @@ get==2018.11.19
 graphviz==0.10.1
 gunicorn==19.9.0
 idna==2.8
+Jinja2==2.10
+MarkupSafe==1.1.1
 numpy==1.16.2
 packaging==19.0
 pandas==0.24.1
+pandas-bokeh==0.1.1
+Pillow==6.0.0
 post==2018.11.20
 public==2018.11.20
 pydotplus==2.0.2
@@ -22,11 +27,13 @@ pygal==2.4.0
 pyparsing==2.3.1
 python-dateutil==2.8.0
 pytz==2018.9
+PyYAML==5.1
 query-string==2018.11.20
 request==2018.11.20
 requests==2.21.0
 six==1.12.0
 soupsieve==1.8
+tornado==6.0.2
 urllib3==1.24.1
 whitenoise==4.1.2
 wikipedia==1.4.0
