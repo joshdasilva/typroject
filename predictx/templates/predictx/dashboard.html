@@ -94,7 +94,10 @@
                   </li>
                </ul>
             </div>
-         </nav>
+           </nav>
+         </div>
+      </div>
+
 
 
    <body>
@@ -102,18 +105,22 @@
    {% endblock %}
    </body>
 
-   <script>
+    <script>
     function dChanged() {
     var x = document.getElementById("mySelect").value;
-    //window.location = logout;
-    //document.location.href = x;
-    window.location.href = '/'+x;
-    //document.getElementById("demo").innerHTML = "Latest Time Series for " + x;
-    //document.getElementById("demo1").innerHTML = "Price Prediction for 14/03/2019 to 21/03/2019 for "+ x;
-    //document.getElementById("demo2").innerHTML = x+"'s Description";
-    //document.getElementById("demo3").innerHTML = "Latest News for "+x;
-    }
+    window.location.href = '/'+x;}
+
+    var i;
+    var Date = moment().format('DD MMM YYYY');
+
+    for (i = 0; i < 16; i++) {
+        text += "The number is " + i + "<br>";
+        document.getElementById('currDatePlus'+i+'d').innerHTML = Date.add('days', i);
+        }
     </script>
+
+     <!--Time-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min.js"></script>
 
    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -125,3 +132,5 @@
     <script src= "http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
     <script src="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.js"></script>
     <script src="http://cdn.pydata.org/bokeh/release/bokeh-api-1.0.4.min.js"></script>
+
+

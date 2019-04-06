@@ -30,7 +30,7 @@ def chart(stock, sname,wikiD):
     ts4 = TechIndicators(key='API_KEY', output_format='pandas')
     data4, meta_data4 = ts4.get_macd(symbol=stock,series_type = 'close', interval='daily')
 
-    title = 'Latest prices for Microsoft Inc.'
+    title = 'Latest prices for'+sname
 
     data.index = pd.to_datetime(data.index)
     data2.index = pd.to_datetime(data2.index)
