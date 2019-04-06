@@ -105,7 +105,7 @@ def chart(stock, sname,wikiD):
 
 
     #Feed them to the Django template.
-    return render_to_response( 'predictx/symbols/symbol.html',
+    return render_to_response( 'predictx/symbol.html',
             {'script' : script , 'div' : div,'script2' : script2 , 'div2' : div2,'script3' : script3 , 'div3' : div3,'script4' : script4 , 'div4' : div4,'script5' : script5 , 'div5' : div5
              ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD,'sname':sname, "stocks":Stock.objects.all})
 
