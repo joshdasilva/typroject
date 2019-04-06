@@ -16,17 +16,7 @@ import pandas as pd
 import wikipedia
 
 
-def MSFT(request):
-    stock = 'MSFT'
-    wikiD = wikipedia.summary("microsoft", sentences=5)
-    return chart(stock, wikiD)
-
-def AAPL(request):
-    return render(request = request,
-                  template_name='predictx/symbols/AAPL.html',
-                  context = {"stocks":Stock.objects.all})
-
-def chart(stock, wikiD):
+def chart(stock, sname,wikiD):
     API_KEY = '90L3VT3DI22ZCS83'
     ts = TimeSeries(key='API_KEY', output_format='pandas')
     data, meta_data = ts.get_daily_adjusted(symbol=stock, outputsize='full')
@@ -115,9 +105,9 @@ def chart(stock, wikiD):
 
 
     #Feed them to the Django template.
-    return render_to_response( 'predictx/symbols/'+stock+'.html',
+    return render_to_response( 'predictx/symbols/symbol.html',
             {'script' : script , 'div' : div,'script2' : script2 , 'div2' : div2,'script3' : script3 , 'div3' : div3,'script4' : script4 , 'div4' : div4,'script5' : script5 , 'div5' : div5
-             ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD, "stocks":Stock.objects.all})
+             ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD,'sname':sname, "stocks":Stock.objects.all})
 
 
 def AlphaVantage(symbol):
@@ -152,7 +142,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You're now logged in as {username}")
-                return redirect('/AAPL')     #/dashboad
+                return redirect('/MSFT')     #/dashboad
             else:
                 messages.error(request, "Incorrect Username or Password")
         else:
@@ -185,121 +175,189 @@ def register(request):
                   template_name = "predictx/register.html",
                   context={"form":form})
 
+def MSFT(request):
+    stock = 'MSFT'
+    sname='Microsoft Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
 
 def AAPL(request):
-    return render(request, 'predictx/symbols/AAPL.html')
-
-def AAPL(request):
-    return render(request = request,
-                  template_name='predictx/symbols/AAPL.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'AAPL'
+    sname = 'Apple Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
 
 def AMZN(request):
-    return render(request = request,
-                  template_name='predictx/symbols/AMZN.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'AMZN'
+    sname = 'Amazon.com Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def FB(request):
-    return render(request = request,
-                  template_name='predictx/symbols/FB.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'FB'
+    sname = 'Facebook Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def BRKB(request):
-    return render(request = request,
-                  template_name='predictx/symbols/BRKB.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'BRK.B'
+    sname = 'Berkshire Hathaway Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def GOOG(request):
-    return render(request = request,
-                  template_name='predictx/symbols/GOOG.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'GOOG'
+    sname = 'Alphabet Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def XOM(request):
-    return render(request = request,
-                  template_name='predictx/symbols/XOM.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'XOM'
+    sname = 'Exxon Mobil Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def JPM(request):
-    return render(request = request,
-                  template_name='predictx/symbols/JPM.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'JPM'
+    sname = 'JPMorgan Chase & Co.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def V(request):
-    return render(request = request,
-                  template_name='predictx/symbols/V.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'V'
+    sname = 'Visa Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def BAC(request):
-    return render(request = request,
-                  template_name='predictx/symbols/BAC.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'BAC'
+    sname = 'Bank of America Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def INTC(request):
-    return render(request = request,
-                  template_name='predictx/symbols/INTC.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'INTC'
+    sname = 'Intel Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def CSCO(request):
-    return render(request = request,
-                  template_name='predictx/symbols/CSCO.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'CSCO'
+    sname = 'Cisco Systems Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def VZ(request):
-    return render(request = request,
-                  template_name='predictx/symbols/VZ.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'VZ'
+    sname = 'Verizon Communications Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def PFE(request):
-    return render(request = request,
-                  template_name='predictx/symbols/PFE.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'PFE'
+    sname = 'Pfizer Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def T(request):
-    return render(request = request,
-                  template_name='predictx/symbols/T.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'T'
+    sname = 'AT&T Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def MA(request):
-    return render(request = request,
-                  template_name='predictx/symbols/MA.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'MA'
+    sname = 'Mastercard Incorporated'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
+def BA(request):
+    stock = 'BA'
+    sname = 'Boeing Company'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def DIS(request):
-    return render(request = request,
-                  template_name='predictx/symbols/DIS.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'DIS'
+    sname = 'Walt Disney Company'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def KO(request):
-    return render(request = request,
-                  template_name='predictx/symbols/KO.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'KO'
+    sname = 'Coca-Cola Company'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def PEP(request):
-    return render(request = request,
-                  template_name='predictx/symbols/PEP.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'PEP'
+    sname = 'PepsiCo Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def NFLX(request):
-    return render(request = request,
-                  template_name='predictx/symbols/NFLX.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'NFLX'
+    sname = 'Netflix Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def MCD(request):
-    return render(request = request,
-                  template_name='predictx/symbols/MCD.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'MCD'
+    sname = 'McDonalds Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def WMT(request):
-    return render(request = request,
-                  template_name='predictx/symbols/WMT.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'WMT'
+    sname = 'Walmart Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def ORCL(request):
-    return render(request = request,
-                  template_name='predictx/symbols/ORCL.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'ORCL'
+    sname = 'Oracle Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def IBM(request):
-    return render(request = request,
-                  template_name='predictx/symbols/IBM.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'IBM'
+    sname = 'Internation Business Machines Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def PYPL(request):
-    return render(request = request,
-                  template_name='predictx/symbols/PYPL.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'PYPL'
+    sname = 'PalPal Holdings Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
+def MMM(request):
+    stock = 'MMM'
+    sname = '3M Company'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def NVDA(request):
-    return render(request = request,
-                  template_name='predictx/symbols/NVDA.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'NVDA'
+    sname = 'Nvidia Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def NKE(request):
-    return render(request = request,
-                  template_name='predictx/symbols/NKE.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'NKE'
+    sname = 'Nike Inc.'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def COST(request):
-    return render(request = request,
-                  template_name='predictx/symbols/COST.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'COST'
+    sname = 'Costco Wholesale Corporation'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
+
 def QCOM(request):
-    return render(request = request,
-                  template_name='predictx/symbols/QCOM.html',
-                  context = {"stocks":Stock.objects.all})
+    stock = 'QCOM'
+    sname = 'Qualcomm Incorporated'
+    wikiD = wikipedia.summary(sname, sentences=5)
+    return chart(stock, sname, wikiD)
 

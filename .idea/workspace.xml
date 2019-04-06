@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1697c0f8-7ab8-480f-814f-e123d8d18345" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/predictx/templates/predictx/symbol.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/predictx/templates/predictx/symbols/symbol.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predictx/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predictx/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="119" column="92" selection-start-line="119" selection-start-column="92" selection-end-line="119" selection-end-column="92" />
+            <state relative-caret-position="221">
+              <caret line="176" selection-start-line="176" selection-end-line="176" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
               </folding>
@@ -53,22 +54,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html">
+        <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbol.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+            <state relative-caret-position="357">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predictx/urls.py">
+        <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="213">
+              <caret line="42" column="61" selection-start-line="42" selection-start-column="61" selection-end-line="42" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -80,8 +78,8 @@
       <list>
         <option value="Python Script" />
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -96,6 +94,8 @@
       <find>block</find>
       <find>FusionTable</find>
       <find>side</find>
+      <find>mic</find>
+      <find>micro</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,17 +143,19 @@
         <option value="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard2.css" />
         <option value="$PROJECT_DIR$/predictx/templates/predictx/dashboard2.html" />
         <option value="$PROJECT_DIR$/predictx/templates/predictx/symbols/AAPL.html" />
-        <option value="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" />
         <option value="$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.css" />
         <option value="$PROJECT_DIR$/predictx/urls.py" />
         <option value="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html" />
+        <option value="$PROJECT_DIR$/predictx/templates/predictx/symbols/symbol.html" />
+        <option value="$PROJECT_DIR$/predictx/templates/predictx/symbol.html" />
+        <option value="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" />
         <option value="$PROJECT_DIR$/predictx/views.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="1168" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="953" />
+    <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -207,14 +209,6 @@
               <item name="predictx" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="predictx" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="typroject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="typroject" type="462c0819:PsiDirectoryNode" />
-              <item name="predictx" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="predictx" type="462c0819:PsiDirectoryNode" />
-              <item name="symbols" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="typroject" type="b2602c69:ProjectViewProjectNode" />
@@ -356,7 +350,7 @@
       <workItem from="1554330852549" duration="2850000" />
       <workItem from="1554333765622" duration="10927000" />
       <workItem from="1554382959765" duration="33939000" />
-      <workItem from="1554480342979" duration="9230000" />
+      <workItem from="1554480342979" duration="13021000" />
     </task>
     <task id="LOCAL-00001" summary="mega update">
       <created>1552956220640</created>
@@ -369,7 +363,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168439000" />
+    <option name="totallyTimeSpent" value="172230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -381,15 +375,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1168" height="1047" extended-state="0" />
+    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.23465703" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.28446388" />
       <window_info id="Structure" order="1" sideWeight="0.5005417" side_tool="true" weight="0.124200426" />
       <window_info id="Favorites" order="2" sideWeight="0.5005417" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49729243" visible="true" weight="0.22210066" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49671772" visible="true" weight="0.22210066" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -397,7 +391,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946696" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="9" sideWeight="0.49946696" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5027076" side_tool="true" visible="true" weight="0.22210066" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50328225" side_tool="true" visible="true" weight="0.22210066" />
       <window_info anchor="bottom" id="manage.py@typroject" order="11" weight="0.32932165" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4978678" weight="0.3206934" />
       <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.49946696" weight="0.32936078" />
@@ -453,16 +447,6 @@
     <SUITE FILE_PATH="coverage/typroject$stockfetch.coverage" NAME="stockfetch Coverage Results" MODIFIED="1554388189916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/predictx" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/importlib/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="124" column="22" lean-forward="true" selection-start-line="124" selection-start-column="22" selection-end-line="124" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predictx/migrations/0001_initial.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/predictx/static/predictx/scripts/dashboard.js" />
     <entry file="file://$PROJECT_DIR$/typroject/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -676,10 +660,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard.html">
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="289">
+          <caret line="17" column="18" lean-forward="true" selection-end-line="174" />
         </state>
       </provider>
     </entry>
@@ -693,17 +677,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.html">
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbols/symbol.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+        <state relative-caret-position="238">
+          <caret line="14" column="11" lean-forward="true" selection-end-line="174" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="42" column="61" selection-start-line="42" selection-start-column="61" selection-end-line="42" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/predictx/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="119" column="92" selection-start-line="119" selection-start-column="92" selection-end-line="119" selection-end-column="92" />
+        <state relative-caret-position="221">
+          <caret line="176" selection-start-line="176" selection-end-line="176" />
           <folding>
             <element signature="e#0#65#0" expanded="true" />
           </folding>
