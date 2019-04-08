@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1697c0f8-7ab8-480f-814f-e123d8d18345" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/symbol.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/symbols/symbol_backup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="1697c0f8-7ab8-480f-814f-e123d8d18345" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +150,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -364,7 +358,7 @@
       <workItem from="1554480342979" duration="16581000" />
       <workItem from="1554517436335" duration="1021000" />
       <workItem from="1554518617183" duration="3014000" />
-      <workItem from="1554559975310" duration="608000" />
+      <workItem from="1554559975310" duration="1202000" />
     </task>
     <task id="LOCAL-00001" summary="mega update">
       <created>1552956220640</created>
@@ -377,7 +371,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="180433000" />
+    <option name="totallyTimeSpent" value="181027000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
