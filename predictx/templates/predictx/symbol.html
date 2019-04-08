@@ -33,12 +33,33 @@
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Moving Averages
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+      <div class="row">
+        <p>
+            <div class="d-flex justify-content-center">
+                 {{ div1 | safe }}
+            </div>
+        </p>
+      </div>
+      </div>
+    </div>
+  </div>
+   <div class="card">
+    <div class="card-header" id="headingOnetwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOnetwo" aria-expanded="false" aria-controls="collapseOnetwo">
           Bollinger Bands
         </button>
       </h5>
     </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapseOnetwo" class="collapse" aria-labelledby="headingOnetwo" data-parent="#accordion">
       <div class="card-body">
       <div class="row">
         <p>
