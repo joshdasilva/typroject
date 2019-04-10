@@ -23,7 +23,7 @@ def chart(stock, sname,wikiD):
     days = 1 , 2,3,4,5,6,7,8,9,10,11,12,13,14,15
     pprint(prediction)
 
-    API_KEY = '90L3VT3DI22ZCS83'
+    API_KEY = 'ZCXPM8FMBJXNOE3J'
     ts = TimeSeries(key='API_KEY', output_format='pandas')
     data, meta_data = ts.get_daily_adjusted(symbol=stock, outputsize='full')
 
