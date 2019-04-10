@@ -15,10 +15,14 @@ from bokeh.driving import count
 from bokeh.models import DatetimeTickFormatter, ColumnarDataSource, Slider, Select
 from pprint import pprint
 import pandas as pd
-import wikipedia
+import wikipedia, os
 
 
 def chart(stock, sname,wikiD):
+    prediction = pd.read_csv(os.path.join(os.path.dirname(__file__), "APPLpre.csv"))
+    days = 1 , 2,3,4,5,6,7,8,9,10,11,12,13,14,15
+    pprint(prediction)
+
     API_KEY = '90L3VT3DI22ZCS83'
     ts = TimeSeries(key='API_KEY', output_format='pandas')
     data, meta_data = ts.get_daily_adjusted(symbol=stock, outputsize='full')
@@ -91,7 +95,7 @@ def chart(stock, sname,wikiD):
         plot_height =600)
     p6 = figure(title= title ,
         x_axis_label= 'Date Time',
-        x_axis_type="datetime",
+        #x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
         plot_height =600)
@@ -142,8 +146,7 @@ def chart(stock, sname,wikiD):
     p5.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p5.line(data2.index, data2['Real Middle Band'], legend= stock+' combo', line_width = 2)
 
-    p6.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p6.line(data2.index, data2['Real Middle Band'], legend= stock+' Predicted price in $', line_width = 2)
+    p6.line(days,prediction['1.818130035400390625e+02'], legend= stock+' Predicted price in $', line_width = 2)
 
     #Store components
     script, div = components(layout0)
