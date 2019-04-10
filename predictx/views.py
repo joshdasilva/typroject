@@ -19,9 +19,26 @@ import wikipedia, os
 
 
 def chart(stock, sname,wikiD):
-    prediction = pd.read_csv(os.path.join(os.path.dirname(__file__), "APPLpre.csv"))
-    days = 1 , 2,3,4,5,6,7,8,9,10,11,12,13,14,15
-    pprint(prediction)
+    prediction = pd.read_csv(os.path.join(os.path.dirname(__file__), "templates/predictx/symbols/"+stock+".csv"))
+    days = 0,1 ,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+
+    pp1 = prediction.iloc[0]['pp']
+    pp2 = prediction.iloc[1]['pp']
+    pp3 = prediction.iloc[2]['pp']
+    pp4 = prediction.iloc[3]['pp']
+    pp5 = prediction.iloc[4]['pp']
+    pp6 = prediction.iloc[5]['pp']
+    pp7 = prediction.iloc[6]['pp']
+    pp8 = prediction.iloc[7]['pp']
+    pp9 = prediction.iloc[8]['pp']
+    pp10 = prediction.iloc[9]['pp']
+    pp11 = prediction.iloc[10]['pp']
+    pp12 = prediction.iloc[11]['pp']
+    pp13 = prediction.iloc[12]['pp']
+    pp14 = prediction.iloc[13]['pp']
+    pp15 = prediction.iloc[14]['pp']
+    pp16 = prediction.iloc[15]['pp']
+
 
     API_KEY = 'ZCXPM8FMBJXNOE3J'
     ts = TimeSeries(key='API_KEY', output_format='pandas')
@@ -112,8 +129,6 @@ def chart(stock, sname,wikiD):
     p1.line(data.index, ema_long, legend= stock+' 200 day EMA', line_width = 2, color ='green',  muted_color='grey', muted_alpha=0.2)
     p1.line(data.index, ema_short, legend= stock+' 20 day MA', line_width = 2, color ='orange',  muted_color='grey', muted_alpha=0.2)
 
-
-
     p1.legend.location = "top_left"
     p1.legend.click_policy = "mute"
 
@@ -125,12 +140,10 @@ def chart(stock, sname,wikiD):
     p2.legend.location = "top_left"
     p2.legend.click_policy = "mute"
 
-
     p3.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p3.line(data.index, data['4. close'], legend=stock + ' price in $', line_width=2, color = 'blue')
     p35.line(data3.index, data3['RSI'], legend= stock+' RSI', line_width = 2, color ='red')
     layout = gridplot([[p3], [p35]])
-
 
     p4.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p4.line(data.index, data['4. close'], legend=stock + ' price in $', line_width=2, color ='blue', muted_color='grey', muted_alpha=0.2)
@@ -141,12 +154,10 @@ def chart(stock, sname,wikiD):
     p45.legend.click_policy = "mute"
     layout2 = gridplot([[p4], [p45]])
 
-
-
     p5.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p5.line(data2.index, data2['Real Middle Band'], legend= stock+' combo', line_width = 2)
 
-    p6.line(days,prediction['1.818130035400390625e+02'], legend= stock+' Predicted price in $', line_width = 2)
+    p6.line(days,prediction['pp'], legend= stock+' Predicted price in $', line_width = 2)
 
     #Store components
     script, div = components(layout0)
@@ -161,7 +172,7 @@ def chart(stock, sname,wikiD):
     #Feed them to the Django template.
     return render_to_response( 'predictx/symbol.html',
             {'script' : script , 'div' : div,'script1':script1, 'div1':div1,'script2' : script2 , 'div2' : div2,'script3' : script3 , 'div3' : div3,'script4' : script4 , 'div4' : div4,'script5' : script5 , 'div5' : div5
-             ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD,'sname':sname, "stocks":Stock.objects.all})
+             ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD,'sname':sname, "stocks":Stock.objects.all,'pp1':pp1,'pp2':pp2,'pp3':pp3,'pp4':pp4,'pp5':pp5,'pp6':pp6,'pp7':pp7,'pp8':pp8,'pp9':pp9,'pp10':pp10,'pp11':pp11,'pp12':pp12,'pp13':pp13,'pp14':pp14,'pp15':pp15,'pp16':pp16})
 
 
 def AlphaVantage(symbol):

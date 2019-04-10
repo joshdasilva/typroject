@@ -115,8 +115,21 @@
     </script>
 
    <script>
-    var currentDate = new Date();
-    document.getElementById('currDatePlus0D').innerHTML = currentDate.setDate(currentDate.getDate() + 1);
+    for (var i = 0; i < 16; i++) {
+        var targetDate = new Date();
+    	targetDate.setDate(targetDate.getDate() + i);
+    document.getElementById('currDatePlus'+i+'D').innerHTML = targetDate.getDate() +"/"+ (targetDate.getMonth() + 1) +"/"+ targetDate.getFullYear()
+    }
+
+    var sdate = new Date();
+    var edate = new Date();
+    sdate.setDate(sdate.getDate());
+    edate.setDate(edate.getDate() + 16);
+    var ssdate = sdate.getDate() +"/"+ (sdate.getMonth() + 1) +"/"+ sdate.getFullYear()
+    var eedate = edate.getDate() +"/"+ (edate.getMonth() + 1) +"/"+ edate.getFullYear()
+    document.getElementById('demo1').innerHTML = "Close Price Prediction from "+ssdate+" to "+eedate
+    //document.getElementById('getStartDate').innerHTML =  sdate.getDate() +"/"+ (sdate.getMonth() + 1) +"/"+ sdate.getFullYear()
+    //document.getElementById('getEndDate').innerHTML = edate.getDate() +"/"+ (edate.getMonth() + 1) +"/"+ edate.getFullYear()
 
 
     </script>
