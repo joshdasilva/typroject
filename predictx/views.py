@@ -47,6 +47,7 @@ def chart(stock, sname,wikiD):
     ts2 = TechIndicators(key='API_KEY', output_format='pandas')
     data2, meta_data2 = ts2.get_bbands(symbol=stock, interval='daily', time_period=10)
 
+
     ts3 = TechIndicators(key='API_KEY', output_format='pandas')
     data3, meta_data3 = ts3.get_rsi(symbol=stock, series_type = 'close', interval='daily')
 
@@ -60,10 +61,10 @@ def chart(stock, sname,wikiD):
     data3.index = pd.to_datetime(data3.index)
     data4.index = pd.to_datetime(data4.index)
 
-    long_rolling = data['4. close'].rolling(window=200).mean()
-    short_rolling = data['4. close'].rolling(window=20).mean()
-    ema_short = data['4. close'].ewm(span=20, adjust=False).mean()
-    ema_long = data['4. close'].ewm(span=200, adjust=False).mean()
+    long_rolling = data['5. adjusted close'].rolling(window=200).mean()
+    short_rolling = data['5. adjusted close'].rolling(window=20).mean()
+    ema_short = data['5. adjusted close'].ewm(span=20, adjust=False).mean()
+    ema_long = data['5. adjusted close'].ewm(span=200, adjust=False).mean()
 
 
     p = figure(title= title ,
@@ -118,12 +119,12 @@ def chart(stock, sname,wikiD):
         plot_height =600)
 
     p.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p.line(data.index, data['4. close'], legend= stock+' price in $', line_width = 2)
+    p.line(data.index, data['5. adjusted close'], legend= stock+' price in $', line_width = 2)
     p05.line(data.index, data['6. volume'], legend= stock+' Volume', line_width = 2, color ='purple')
     layout0 = gridplot([[p], [p05]])
 
     p1.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p1.line(data.index, data['4. close'], legend= stock+' price in $', line_width = 2,color='blue', muted_color='grey', muted_alpha=0.2)
+    p1.line(data.index, data['5. adjusted close'], legend= stock+' price in $', line_width = 2,color='blue', muted_color='grey', muted_alpha=0.2)
     p1.line(data.index, long_rolling, legend= stock+' 200 day MA', line_width = 2, color ='red',  muted_color='grey', muted_alpha=0.2)
     p1.line(data.index, short_rolling, legend= stock+' 20 day MA', line_width = 2, color ='yellow',  muted_color='grey', muted_alpha=0.2)
     p1.line(data.index, ema_long, legend= stock+' 200 day EMA', line_width = 2, color ='green',  muted_color='grey', muted_alpha=0.2)
