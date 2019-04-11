@@ -7,18 +7,17 @@ from django.contrib import messages
 from .forms import NewUserForm
 from alpha_vantage.timeseries import TimeSeries
 from alpha_vantage.techindicators import TechIndicators
-
+from math import pi
 from bokeh.layouts import row, column, gridplot
 from bokeh.plotting import figure, output_file, show, curdoc, _figure
 from bokeh.embed import components
 from bokeh.driving import count
-from bokeh.models import DatetimeTickFormatter, ColumnarDataSource, Slider, Select
+from bokeh.models import DatetimeTickFormatter, ColumnarDataSource, Slider, Select, BasicTickFormatter
 from pprint import pprint
 import pandas as pd
 import wikipedia, os
 
-
-def chart(stock, sname,wikiD):
+def chart(stock, sname, wikiD):
     prediction = pd.read_csv(os.path.join(os.path.dirname(__file__), "templates/predictx/symbols/"+stock+".csv"))
     days = 0,1 ,2,3,4,5,6,7,8,9,10,11,12,13,14,15
 
@@ -47,7 +46,6 @@ def chart(stock, sname,wikiD):
     ts2 = TechIndicators(key='API_KEY', output_format='pandas')
     data2, meta_data2 = ts2.get_bbands(symbol=stock, interval='daily', time_period=10)
 
-
     ts3 = TechIndicators(key='API_KEY', output_format='pandas')
     data3, meta_data3 = ts3.get_rsi(symbol=stock, series_type = 'close', interval='daily')
 
@@ -67,13 +65,41 @@ def chart(stock, sname,wikiD):
     ema_long = data['5. adjusted close'].ewm(span=200, adjust=False).mean()
 
 
+
+    latest = data.tail(1)
+    lOpen = latest.iloc[:, 0:1].values
+    lHigh = latest.iloc[:, 1:2].values
+    lLow = latest.iloc[:, 2:3].values
+    lClose = latest.iloc[:, 3:4].values
+    lAdjClose = latest.iloc[:, 4:5].values
+    lVol = latest.iloc[:, 5:6].values
+    lDiv = latest.iloc[:, 6:7].values
+    lSplit = latest.iloc[:, 7:8].values
+
+    # lOpen = latest['1. open']
+    # lHigh = latest['2. high']
+    # lLow = latest['3. low']
+    # lClose = latest['4. close']
+    # lAdjClose = latest['5. adjusted close']
+    # lVol = latest['6. volume']
+    # lDiv = latest['7. dividend amount']
+    # lSplit = latest['8. split coefficient']
+
+    cdata = data.tail(310)
+    inc = cdata['4. close'] > cdata['1. open']
+    dec = cdata['1. open'] > cdata['4. close']
+    w = 12 * 60 * 60 * 1000  # half day in ms
+
     p = figure(title= title ,
         x_axis_label= 'Date Time',
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
         plot_height =600)
-    p05 = figure(plot_height=140, plot_width=1300, x_range=p.x_range, y_axis_location="right")
+
+    p05 = figure(plot_height=140, plot_width=1300, x_range=p.x_range, x_axis_type="datetime", y_axis_location="right")
+    p05.yaxis.formatter = BasicTickFormatter(use_scientific=False)
+
 
     p1 = figure(title= title ,
         x_axis_label= 'Date Time',
@@ -105,18 +131,23 @@ def chart(stock, sname,wikiD):
     p45 = figure(plot_height=250, plot_width = 1300,  x_range=p4.x_range, y_axis_location="right")
 
 
+
     p5 = figure(title= title ,
         x_axis_label= 'Date Time',
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
         plot_height =600)
+
+
+
     p6 = figure(title= title ,
         x_axis_label= 'Date Time',
         #x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
         plot_height =600)
+
 
     p.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p.line(data.index, data['5. adjusted close'], legend= stock+' price in $', line_width = 2)
@@ -155,8 +186,11 @@ def chart(stock, sname,wikiD):
     p45.legend.click_policy = "mute"
     layout2 = gridplot([[p4], [p45]])
 
-    p5.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p5.line(data2.index, data2['Real Middle Band'], legend= stock+' combo', line_width = 2)
+    p5.xaxis.major_label_orientation = pi / 4
+    p5.grid.grid_line_alpha = 0.3
+    p5.segment(cdata.index, cdata['2. high'], cdata.index, cdata['3. low'], color="black")
+    p5.vbar(cdata.index[inc], w, cdata['1. open'][inc], cdata['4. close'][inc], fill_color="#7cfc00", line_color="black")
+    p5.vbar(cdata.index[dec], w, cdata['1. open'][dec], cdata['4. close'][dec], fill_color="#ff0000", line_color="black")
 
     p6.line(days,prediction['pp'], legend= stock+' Predicted price in $', line_width = 2)
 
@@ -169,12 +203,11 @@ def chart(stock, sname,wikiD):
     script5, div5 = components(p5)
     script6, div6 = components(p6)
 
-
     #Feed them to the Django template.
     return render_to_response( 'predictx/symbol.html',
             {'script' : script , 'div' : div,'script1':script1, 'div1':div1,'script2' : script2 , 'div2' : div2,'script3' : script3 , 'div3' : div3,'script4' : script4 , 'div4' : div4,'script5' : script5 , 'div5' : div5
-             ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD,'sname':sname, "stocks":Stock.objects.all,'pp1':pp1,'pp2':pp2,'pp3':pp3,'pp4':pp4,'pp5':pp5,'pp6':pp6,'pp7':pp7,'pp8':pp8,'pp9':pp9,'pp10':pp10,'pp11':pp11,'pp12':pp12,'pp13':pp13,'pp14':pp14,'pp15':pp15,'pp16':pp16})
-
+             ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD,'sname':sname, "stocks":Stock.objects.all,'pp1':pp1,'pp2':pp2,'pp3':pp3,'pp4':pp4,'pp5':pp5,'pp6':pp6,'pp7':pp7,'pp8':pp8,'pp9':pp9,'pp10':pp10,'pp11':pp11,'pp12':pp12,'pp13':pp13,'pp14':pp14,'pp15':pp15,'pp16':pp16,
+             'lHigh': lHigh,'lLow': lLow,'lClose': lClose,'lAdjClose': lAdjClose,'lVol': lVol,'lDiv': lDiv,'lSplit': lSplit,'lOpen': lOpen })
 
 def AlphaVantage(symbol):
     api_key=open('alpha.txt','r').read()
@@ -194,9 +227,6 @@ def logout_request(request):
     logout(request)
     messages.info(request, "Succesfully Logged Out!")
     return redirect("predictx:indexpage")
-
-#def current_stock(request):
-
 
 def login_request(request):
     if request.method == 'POST':
@@ -426,4 +456,3 @@ def QCOM(request):
     sname = 'Qualcomm Incorporated'
     wikiD = wikipedia.summary(sname, sentences=5)
     return chart(stock, sname, wikiD)
-
