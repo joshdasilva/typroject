@@ -2,19 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1697c0f8-7ab8-480f-814f-e123d8d18345" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbol.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/symbol.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/AAPL.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/AMZN.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/BAC.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/BRK.B.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/INTC.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/JPM.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/MSFT.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/V.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbols/XOM.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/predictx/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predictx/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="69" column="38" lean-forward="true" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
+            <state relative-caret-position="587">
+              <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
               </folding>
@@ -208,6 +195,14 @@
             <path>
               <item name="typroject" type="b2602c69:ProjectViewProjectNode" />
               <item name="typroject" type="462c0819:PsiDirectoryNode" />
+              <item name="predictx" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="predictx" type="462c0819:PsiDirectoryNode" />
+              <item name="symbols" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="typroject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="typroject" type="462c0819:PsiDirectoryNode" />
               <item name="typroject" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -353,7 +348,7 @@
       <workItem from="1554899431331" duration="12375000" />
       <workItem from="1554937058136" duration="5682000" />
       <workItem from="1554989040574" duration="1541000" />
-      <workItem from="1554994946147" duration="14417000" />
+      <workItem from="1554994946147" duration="15983000" />
     </task>
     <task id="LOCAL-00001" summary="mega update">
       <created>1552956220640</created>
@@ -366,7 +361,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="233664000" />
+    <option name="totallyTimeSpent" value="235230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -625,8 +620,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/predictx/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="69" column="38" lean-forward="true" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
+        <state relative-caret-position="587">
+          <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
           <folding>
             <element signature="e#0#65#0" expanded="true" />
           </folding>

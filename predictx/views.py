@@ -119,8 +119,7 @@ def chart(stock, sname, wikiD):
         y_axis_label= 'Price in $',
         plot_width =1300,
         plot_height =600)
-    p35 = figure(plot_height=250, plot_width = 1300, x_range=p3.x_range, y_axis_location="right")
-
+    p35 = figure(plot_height=250, plot_width = 1300, x_range=p3.x_range, y_axis_location="right", x_axis_type="datetime")
 
     p4 = figure(title= title ,
         x_axis_label= 'Date Time',
@@ -128,10 +127,8 @@ def chart(stock, sname, wikiD):
         y_axis_label= 'Price in $',
         plot_width =1300,
         plot_height =600)
-    p45 = figure(plot_height=250, plot_width = 1300,  x_range=p4.x_range, y_axis_location="right")
-
-
-
+    p45 = figure(plot_height=250, plot_width = 1300,  x_range=p4.x_range, y_axis_location="right", x_axis_type="datetime")
+    
     p5 = figure(title= title ,
         x_axis_label= 'Date Time',
         x_axis_type="datetime",
