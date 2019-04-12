@@ -44,8 +44,6 @@ def chart(stock, sname, wikiD):
     ema_short = data['5. adjusted close'].ewm(span=20, adjust=False).mean()
     ema_long = data['5. adjusted close'].ewm(span=200, adjust=False).mean()
 
-
-
     latest = data.tail(1)
     lOpen = latest.iloc[:, 0:1].values
     lHigh = latest.iloc[:, 1:2].values
@@ -66,13 +64,13 @@ def chart(stock, sname, wikiD):
     # lSplit = latest['8. split coefficient']
 
 
-    #source0 = ColumnDataSource(data=dict(cx=cdata.index, ch=cdata['2. high'],cl=cdata['3. low'],inci=cdata.index[inc], inco=cdata['1. open'][inc], incc= cdata['4. close'][inc], deci=cdata.index[dec],deco=cdata['1. open'][dec], ))
     source1 = ColumnDataSource(data=dict(x=data.index, y=data['5. adjusted close'], ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
     source2 = ColumnDataSource(data=dict(x = data.index, z=data['4. close'], bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
     source3 = ColumnDataSource(data=dict(x = data.index, x2= data3.index,  z=data['4. close'], rsi = data3['RSI']))
     source4 = ColumnDataSource(data=dict(x = data.index, x2 = data4.index, z=data['4. close'], macd=data4['MACD'], macds = data4['MACD_Signal']))
-    source5 = ColumnDataSource(data=dict(x = data.index, y=data['5. adjusted close'],o=data['1. open'],h=data['2. high'],l=data['3. low'],c=data['4. close']))
+    source5 = ColumnDataSource(data=dict(x = data.index, y=data['5. adjusted close'],o=data['1. open'],h=data['2. high'],l=data['3. low'],c=data['4. close'], vol=data['6. volume']))
 
+    pprint(data3.index)
 
     p = figure(title= title ,
         x_axis_label= 'Date Time',
@@ -162,14 +160,15 @@ def chart(stock, sname, wikiD):
         plot_height =600,
         tools = ['pan', 'wheel_zoom', 'box_zoom','reset']
     )
-    p5.add_tools(HoverTool(tooltips=[("(Date","@x{%F}"), ("Adjusted Close", "@y{%0.2f}"), ("open", "@o{%0.2f}"), ("high", "@h{%0.2f}"), ("low", "@l{%0.2f}"), ("close", "@c{%0.2f}")],
+    p5.add_tools(HoverTool(tooltips=[("(Date","@x{%F}"), ("Adjusted Close", "@y{%0.2f}"), ("open", "@o{%0.2f}"), ("high", "@h{%0.2f}"), ("low", "@l{%0.2f}"), ("close", "@c{%0.2f}"), ("Volume", "@vol{%0.2f}")],
         formatters={
             'x': 'datetime',
             'y': 'printf',
             'o': 'printf',
             'h': 'printf',
             'l': 'printf',
-            'c': 'printf'
+            'c': 'printf',
+            'vol':'printf'
 
         },
         mode='vline')
@@ -217,13 +216,13 @@ def chart(stock, sname, wikiD):
 
     p3.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p3.line('x', 'z', legend=stock + ' price in $', line_width=2, color = 'blue', source = source3)
-    p35.line('x2', 'rsi', legend= stock+' RSI', line_width = 2, color ='red', source = source3)
+    p35.line('x', 'rsi', legend= stock+' RSI', line_width = 2, color ='red', source = source3) #x2
     rsi = gridplot([[p3], [p35]])
 
     p4.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p4.line('x', 'z', legend=stock + ' price in $', line_width=2, color ='blue', muted_color='grey', muted_alpha=0.2, source= source4)
-    p45.line('x2','macd' ,legend=stock+' MACD', line_width=2, color='green', muted_color='grey', muted_alpha=0.2, source = source4)
-    p45.line('x2', 'macds', color='orange', legend=stock+' MACD signal', line_width=2, muted_color='grey', muted_alpha=0.2, source= source4)
+    p45.line('x','macd' ,legend=stock+' MACD', line_width=2, color='green', muted_color='grey', muted_alpha=0.2, source = source4) #x2
+    p45.line('x', 'macds', color='orange', legend=stock+' MACD signal', line_width=2, muted_color='grey', muted_alpha=0.2, source= source4) #x2
     p45.vbar(x=data4.index, bottom=[ 0 for _ in data4.index], top=data4['MACD_Hist'], width=4, color="purple", legend=stock+' MACD Histagram', line_width=2, muted_color='grey', muted_alpha=0.2)
     p45.legend.location = "top_left"
     p45.legend.click_policy = "mute"
@@ -231,7 +230,7 @@ def chart(stock, sname, wikiD):
 
     p5.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p5.line('x','y',source=source5,legend= stock+' price in $', line_width = 2)
-    p55.line(data.index, data['6. volume'], legend= stock+' Volume', line_width = 2, color ='purple')
+    p55.line('x', 'vol', legend= stock+' Volume', line_width = 2, color ='purple', source=source5)
     volume = gridplot([[p5], [p55]])
 
     prediction = pd.read_csv(os.path.join(os.path.dirname(__file__), "templates/predictx/symbols/"+stock+".csv"))
