@@ -12,7 +12,7 @@ from bokeh.layouts import row, column, gridplot
 from bokeh.plotting import figure, output_file, show, curdoc, _figure
 from bokeh.embed import components
 from bokeh.driving import count
-from bokeh.models import DatetimeTickFormatter, ColumnarDataSource, Slider, Select, BasicTickFormatter
+from bokeh.models import DatetimeTickFormatter,HoverTool, ColumnDataSource, Slider, Select, BasicTickFormatter
 from pprint import pprint
 import pandas as pd
 import wikipedia, os
@@ -90,19 +90,17 @@ def chart(stock, sname, wikiD):
     dec = cdata['1. open'] > cdata['4. close']
     w = 12 * 60 * 60 * 1000  # half day in ms
 
+
+
+
     p = figure(title= title ,
         x_axis_label= 'Date Time',
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
         plot_height =600)
-
-    p05 = figure(plot_height=140, plot_width=1300, x_range=p.x_range, x_axis_type="datetime", y_axis_location="right")
-    p05.yaxis.formatter = BasicTickFormatter(use_scientific=False)
-
-
     p1 = figure(title= title ,
-        x_axis_label= 'Date Time',
+        x_axis_label= 'date',
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
@@ -128,15 +126,16 @@ def chart(stock, sname, wikiD):
         plot_width =1300,
         plot_height =600)
     p45 = figure(plot_height=250, plot_width = 1300,  x_range=p4.x_range, y_axis_location="right", x_axis_type="datetime")
-    
-    p5 = figure(title= title ,
-        x_axis_label= 'Date Time',
+
+
+    p5 = figure( title= title ,
+        x_axis_label= 'Date',
         x_axis_type="datetime",
-        y_axis_label= 'Price in $',
+        y_axis_label= 'Close Price',
         plot_width =1300,
         plot_height =600)
-
-
+    p55 = figure(plot_height=140, plot_width=1300, x_range=p5.x_range, x_axis_type="datetime", y_axis_location="right")
+    p55.yaxis.formatter = BasicTickFormatter(use_scientific=False)
 
     p6 = figure(title= title ,
         x_axis_label= 'Date Time',
@@ -145,11 +144,11 @@ def chart(stock, sname, wikiD):
         plot_width =1300,
         plot_height =600)
 
-
-    p.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p.line(data.index, data['5. adjusted close'], legend= stock+' price in $', line_width = 2)
-    p05.line(data.index, data['6. volume'], legend= stock+' Volume', line_width = 2, color ='purple')
-    layout0 = gridplot([[p], [p05]])
+    p.xaxis.major_label_orientation = pi / 4
+    p.grid.grid_line_alpha = 0.3
+    p.segment(cdata.index, cdata['2. high'], cdata.index, cdata['3. low'], color="black")
+    p.vbar(cdata.index[inc], w, cdata['1. open'][inc], cdata['4. close'][inc], fill_color="#7cfc00", line_color="black")
+    p.vbar(cdata.index[dec], w, cdata['1. open'][dec], cdata['4. close'][dec], fill_color="#ff0000", line_color="black")
 
     p1.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p1.line(data.index, data['5. adjusted close'], legend= stock+' price in $', line_width = 2,color='blue', muted_color='grey', muted_alpha=0.2)
@@ -157,7 +156,6 @@ def chart(stock, sname, wikiD):
     p1.line(data.index, short_rolling, legend= stock+' 20 day MA', line_width = 2, color ='yellow',  muted_color='grey', muted_alpha=0.2)
     p1.line(data.index, ema_long, legend= stock+' 200 day EMA', line_width = 2, color ='green',  muted_color='grey', muted_alpha=0.2)
     p1.line(data.index, ema_short, legend= stock+' 20 day MA', line_width = 2, color ='orange',  muted_color='grey', muted_alpha=0.2)
-
     p1.legend.location = "top_left"
     p1.legend.click_policy = "mute"
 
@@ -172,7 +170,7 @@ def chart(stock, sname, wikiD):
     p3.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p3.line(data.index, data['4. close'], legend=stock + ' price in $', line_width=2, color = 'blue')
     p35.line(data3.index, data3['RSI'], legend= stock+' RSI', line_width = 2, color ='red')
-    layout = gridplot([[p3], [p35]])
+    rsi = gridplot([[p3], [p35]])
 
     p4.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p4.line(data.index, data['4. close'], legend=stock + ' price in $', line_width=2, color ='blue', muted_color='grey', muted_alpha=0.2)
@@ -181,23 +179,22 @@ def chart(stock, sname, wikiD):
     p45.vbar(x=data4.index, bottom=[ 0 for _ in data4.index], top=data4['MACD_Hist'], width=4, color="purple", legend=stock+' MACD Histagram', line_width=2, muted_color='grey', muted_alpha=0.2)
     p45.legend.location = "top_left"
     p45.legend.click_policy = "mute"
-    layout2 = gridplot([[p4], [p45]])
+    macd = gridplot([[p4], [p45]])
 
-    p5.xaxis.major_label_orientation = pi / 4
-    p5.grid.grid_line_alpha = 0.3
-    p5.segment(cdata.index, cdata['2. high'], cdata.index, cdata['3. low'], color="black")
-    p5.vbar(cdata.index[inc], w, cdata['1. open'][inc], cdata['4. close'][inc], fill_color="#7cfc00", line_color="black")
-    p5.vbar(cdata.index[dec], w, cdata['1. open'][dec], cdata['4. close'][dec], fill_color="#ff0000", line_color="black")
+    p5.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
+    p5.line(data.index, data['5. adjusted close'],legend= stock+' price in $', line_width = 2)
+    p55.line(data.index, data['6. volume'], legend= stock+' Volume', line_width = 2, color ='purple')
+    volume = gridplot([[p5], [p55]])
 
     p6.line(days,prediction['pp'], legend= stock+' Predicted price in $', line_width = 2)
 
     #Store components
-    script, div = components(layout0)
+    script, div = components(p)
     script1, div1 = components(p1)
     script2, div2 = components(p2)
-    script3, div3 = components(layout)
-    script4, div4 = components(layout2)
-    script5, div5 = components(p5)
+    script3, div3 = components(rsi)
+    script4, div4 = components(macd)
+    script5, div5 = components(volume)
     script6, div6 = components(p6)
 
     #Feed them to the Django template.

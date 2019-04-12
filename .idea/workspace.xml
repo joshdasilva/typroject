@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1697c0f8-7ab8-480f-814f-e123d8d18345" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predictx/templates/predictx/symbol.html" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/templates/predictx/symbol.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predictx/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/predictx/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,20 +42,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predictx/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
+            <state relative-caret-position="213">
+              <caret line="131" column="29" lean-forward="true" selection-start-line="131" selection-start-column="29" selection-end-line="131" selection-end-column="29" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbol.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="217" selection-start-line="18" selection-start-column="217" selection-end-line="18" selection-end-column="217" />
             </state>
           </provider>
         </entry>
@@ -93,7 +86,11 @@
       <find>pp</find>
       <find>hist</find>
       <find>latest</find>
+      <find>source</find>
       <find>des</find>
+      <find>p</find>
+      <find>p</find>
+      <find>p5</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -348,7 +345,7 @@
       <workItem from="1554899431331" duration="12375000" />
       <workItem from="1554937058136" duration="5682000" />
       <workItem from="1554989040574" duration="1541000" />
-      <workItem from="1554994946147" duration="15983000" />
+      <workItem from="1554994946147" duration="24366000" />
     </task>
     <task id="LOCAL-00001" summary="mega update">
       <created>1552956220640</created>
@@ -361,7 +358,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="235230000" />
+    <option name="totallyTimeSpent" value="243613000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -373,15 +370,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.23413567" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.114072494" />
       <window_info id="Structure" order="1" sideWeight="0.5005417" side_tool="true" weight="0.124200426" />
       <window_info id="Favorites" order="2" sideWeight="0.5005417" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7073561" visible="true" weight="0.22538294" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7073561" visible="true" weight="0.27735645" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -613,15 +610,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/predictx/templates/predictx/symbol.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="217" selection-start-line="18" selection-start-column="217" selection-end-line="18" selection-end-column="217" />
+        <state relative-caret-position="170">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/predictx/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
+        <state relative-caret-position="213">
+          <caret line="131" column="29" lean-forward="true" selection-start-line="131" selection-start-column="29" selection-end-line="131" selection-end-column="29" />
           <folding>
             <element signature="e#0#65#0" expanded="true" />
           </folding>
