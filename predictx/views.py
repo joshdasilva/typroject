@@ -65,12 +65,13 @@ def chart(stock, sname, wikiD):
     # lDiv = latest['7. dividend amount']
     # lSplit = latest['8. split coefficient']
 
+
+    #source0 = ColumnDataSource(data=dict(cx=cdata.index, ch=cdata['2. high'],cl=cdata['3. low'],inci=cdata.index[inc], inco=cdata['1. open'][inc], incc= cdata['4. close'][inc], deci=cdata.index[dec],deco=cdata['1. open'][dec], ))
     source1 = ColumnDataSource(data=dict(x=data.index, y=data['5. adjusted close'], ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
     source2 = ColumnDataSource(data=dict(x = data.index, z=data['4. close'], bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
     source3 = ColumnDataSource(data=dict(x = data.index, x2= data3.index,  z=data['4. close'], rsi = data3['RSI']))
     source4 = ColumnDataSource(data=dict(x = data.index, x2 = data4.index, z=data['4. close'], macd=data4['MACD'], macds = data4['MACD_Signal']))
-    source5 = ColumnDataSource(data=dict(x = data.index, y=data['5. adjusted close']))
-
+    source5 = ColumnDataSource(data=dict(x = data.index, y=data['5. adjusted close'],o=data['1. open'],h=data['2. high'],l=data['3. low'],c=data['4. close']))
 
 
     p = figure(title= title ,
@@ -78,7 +79,9 @@ def chart(stock, sname, wikiD):
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
-        plot_height =600,)
+        plot_height =600,
+        tools=['pan', 'wheel_zoom', 'box_zoom', 'reset']
+               )
     p1 = figure(title= title ,
         x_axis_label= 'date',
         x_axis_type="datetime",
@@ -159,12 +162,15 @@ def chart(stock, sname, wikiD):
         plot_height =600,
         tools = ['pan', 'wheel_zoom', 'box_zoom','reset']
     )
-    p5.add_tools(HoverTool(tooltips=[
-        ("(Date:, Adjusted Close:)", "(@x{%F}, @y{%0.2f})"),
-    ],
+    p5.add_tools(HoverTool(tooltips=[("(Date","@x{%F}"), ("Adjusted Close", "@y{%0.2f}"), ("open", "@o{%0.2f}"), ("high", "@h{%0.2f}"), ("low", "@l{%0.2f}"), ("close", "@c{%0.2f}")],
         formatters={
             'x': 'datetime',
             'y': 'printf',
+            'o': 'printf',
+            'h': 'printf',
+            'l': 'printf',
+            'c': 'printf'
+
         },
         mode='vline')
     )
@@ -180,7 +186,8 @@ def chart(stock, sname, wikiD):
         plot_width =1300,
         plot_height =600)
 
-    cdata = data.tail(310)
+
+    cdata = data.tail(331)
     inc = cdata['4. close'] > cdata['1. open']
     dec = cdata['1. open'] > cdata['4. close']
     w = 12 * 60 * 60 * 1000  # half day in ms
