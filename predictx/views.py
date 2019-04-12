@@ -18,26 +18,6 @@ import pandas as pd
 import wikipedia, os
 
 def chart(stock, sname, wikiD):
-    prediction = pd.read_csv(os.path.join(os.path.dirname(__file__), "templates/predictx/symbols/"+stock+".csv"))
-    days = 0,1 ,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-
-    pp1 = prediction.iloc[0]['pp']
-    pp2 = prediction.iloc[1]['pp']
-    pp3 = prediction.iloc[2]['pp']
-    pp4 = prediction.iloc[3]['pp']
-    pp5 = prediction.iloc[4]['pp']
-    pp6 = prediction.iloc[5]['pp']
-    pp7 = prediction.iloc[6]['pp']
-    pp8 = prediction.iloc[7]['pp']
-    pp9 = prediction.iloc[8]['pp']
-    pp10 = prediction.iloc[9]['pp']
-    pp11 = prediction.iloc[10]['pp']
-    pp12 = prediction.iloc[11]['pp']
-    pp13 = prediction.iloc[12]['pp']
-    pp14 = prediction.iloc[13]['pp']
-    pp15 = prediction.iloc[14]['pp']
-    pp16 = prediction.iloc[15]['pp']
-
 
     API_KEY = 'ZCXPM8FMBJXNOE3J'
     ts = TimeSeries(key='API_KEY', output_format='pandas')
@@ -85,11 +65,11 @@ def chart(stock, sname, wikiD):
     # lDiv = latest['7. dividend amount']
     # lSplit = latest['8. split coefficient']
 
-    cdata = data.tail(310)
-    inc = cdata['4. close'] > cdata['1. open']
-    dec = cdata['1. open'] > cdata['4. close']
-    w = 12 * 60 * 60 * 1000  # half day in ms
-
+    source1 = ColumnDataSource(data=dict(x=data.index, y=data['5. adjusted close'], ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
+    source2 = ColumnDataSource(data=dict(x = data.index, z=data['4. close'], bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
+    source3 = ColumnDataSource(data=dict(x = data.index, x2= data3.index,  z=data['4. close'], rsi = data3['RSI']))
+    source4 = ColumnDataSource(data=dict(x = data.index, x2 = data4.index, z=data['4. close'], macd=data4['MACD'], macds = data4['MACD_Signal']))
+    source5 = ColumnDataSource(data=dict(x = data.index, y=data['5. adjusted close']))
 
 
 
@@ -98,34 +78,77 @@ def chart(stock, sname, wikiD):
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
-        plot_height =600)
+        plot_height =600,)
     p1 = figure(title= title ,
         x_axis_label= 'date',
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
-        plot_height =600)
+        plot_height =600,
+        tools=['pan', 'wheel_zoom', 'box_zoom', 'reset']
+                )
+    p1.add_tools(HoverTool(tooltips=[("Date", "@x{%F}"), ("20 day SMA", "@ssma{%0.2f}"), ("200 day SMA", "@lsma{%0.2f}"), ("20 day EMA", "@sema{%0.2f}"), ("200 day EMA", "@lema{%0.2f}")],
+        formatters={
+            'x': 'datetime',
+            'ssma': 'printf',
+            'lsma': 'printf',
+            'sema': 'printf',
+            'lema': 'printf'
+        },
+        mode='vline'))
+
     p2 = figure(title= title ,
         x_axis_label= 'Date Time',
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
-        plot_height =600)
+        plot_height =600,
+        tools=['pan', 'wheel_zoom', 'box_zoom', 'reset']
+                )
+    p2.add_tools(HoverTool(tooltips=[("Date", "@x{%F}"), ("Close", "@z{%0.2f}"), ("Real Upper Band", "@bu{%0.2f}"), ("Real Middle Band", "@bm{%0.2f}"), ("Real Lower Band", "@bl{%0.2f}")],
+        formatters={
+            'x': 'datetime',
+            'z': 'printf',
+            'bu': 'printf',
+            'bm': 'printf',
+            'bl': 'printf'
+        },
+        mode='vline'))
     p3 = figure(title= title ,
         x_axis_label= 'Date Time',
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
-        plot_height =600)
+        plot_height =600,
+        tools=['pan', 'wheel_zoom', 'box_zoom', 'reset']
+                )
     p35 = figure(plot_height=250, plot_width = 1300, x_range=p3.x_range, y_axis_location="right", x_axis_type="datetime")
+    p3.add_tools(HoverTool(tooltips=[("Date", "@x{%F}"), ("Close", "@z{%0.2f}"), ("RSI", "@rsi{%0.2f}")],
+        formatters={
+            'x': 'datetime',
+            'z': 'printf',
+            'rsi': 'printf'
+        },
+        mode='vline'))
 
     p4 = figure(title= title ,
         x_axis_label= 'Date Time',
         x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
-        plot_height =600)
+        plot_height =600,
+        tools=['pan', 'wheel_zoom', 'box_zoom', 'reset']
+                )
     p45 = figure(plot_height=250, plot_width = 1300,  x_range=p4.x_range, y_axis_location="right", x_axis_type="datetime")
+    p4.add_tools(HoverTool(tooltips=[("Date", "@x{%F}"), ("Close", "@z{%0.2f}"), ("MACD", "@macd{%0.2f}"), ("MAC Signal", "@macds{%0.2f}")],
+                               formatters={
+                                   'x': 'datetime',
+                                   'z': 'printf',
+                                   'macd': 'printf',
+                                   'macds': 'printf',
+                                   'macdh': 'printf'
+                               },
+                               mode='vline'))
 
 
     p5 = figure( title= title ,
@@ -133,59 +156,95 @@ def chart(stock, sname, wikiD):
         x_axis_type="datetime",
         y_axis_label= 'Close Price',
         plot_width =1300,
-        plot_height =600)
+        plot_height =600,
+        tools = ['pan', 'wheel_zoom', 'box_zoom','reset']
+    )
+    p5.add_tools(HoverTool(tooltips=[
+        ("(Date:, Adjusted Close:)", "(@x{%F}, @y{%0.2f})"),
+    ],
+        formatters={
+            'x': 'datetime',
+            'y': 'printf',
+        },
+        mode='vline')
+    )
+
     p55 = figure(plot_height=140, plot_width=1300, x_range=p5.x_range, x_axis_type="datetime", y_axis_location="right")
     p55.yaxis.formatter = BasicTickFormatter(use_scientific=False)
 
+
     p6 = figure(title= title ,
-        x_axis_label= 'Date Time',
+        x_axis_label= 'Days',
         #x_axis_type="datetime",
         y_axis_label= 'Price in $',
         plot_width =1300,
         plot_height =600)
 
+    cdata = data.tail(310)
+    inc = cdata['4. close'] > cdata['1. open']
+    dec = cdata['1. open'] > cdata['4. close']
+    w = 12 * 60 * 60 * 1000  # half day in ms
     p.xaxis.major_label_orientation = pi / 4
     p.grid.grid_line_alpha = 0.3
     p.segment(cdata.index, cdata['2. high'], cdata.index, cdata['3. low'], color="black")
     p.vbar(cdata.index[inc], w, cdata['1. open'][inc], cdata['4. close'][inc], fill_color="#7cfc00", line_color="black")
     p.vbar(cdata.index[dec], w, cdata['1. open'][dec], cdata['4. close'][dec], fill_color="#ff0000", line_color="black")
 
+
     p1.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p1.line(data.index, data['5. adjusted close'], legend= stock+' price in $', line_width = 2,color='blue', muted_color='grey', muted_alpha=0.2)
-    p1.line(data.index, long_rolling, legend= stock+' 200 day MA', line_width = 2, color ='red',  muted_color='grey', muted_alpha=0.2)
-    p1.line(data.index, short_rolling, legend= stock+' 20 day MA', line_width = 2, color ='yellow',  muted_color='grey', muted_alpha=0.2)
-    p1.line(data.index, ema_long, legend= stock+' 200 day EMA', line_width = 2, color ='green',  muted_color='grey', muted_alpha=0.2)
-    p1.line(data.index, ema_short, legend= stock+' 20 day MA', line_width = 2, color ='orange',  muted_color='grey', muted_alpha=0.2)
+    p1.line('x','y', legend= stock+' price in $', line_width = 2,color='blue', muted_color='grey', muted_alpha=0.2, source=source1)
+    p1.line('x', 'lsma', legend= stock+' 200 day MA', line_width = 2, color ='red',  muted_color='grey', muted_alpha=0.2, source=source1)
+    p1.line('x', 'ssma', legend= stock+' 20 day MA', line_width = 2, color ='yellow',  muted_color='grey', muted_alpha=0.2, source=source1)
+    p1.line('x', 'lema', legend= stock+' 200 day EMA', line_width = 2, color ='green',  muted_color='grey', muted_alpha=0.2, source=source1)
+    p1.line('x', 'sema', legend= stock+' 20 day MA', line_width = 2, color ='orange',  muted_color='grey', muted_alpha=0.2, source=source1)
     p1.legend.location = "top_left"
     p1.legend.click_policy = "mute"
 
     p2.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p2.line(data.index, data['4. close'], legend= stock+' price in $', line_width = 2, color ='blue', muted_color='grey', muted_alpha=0.2)
-    p2.line(data2.index, data2['Real Upper Band'], legend= stock+' Real Upper Band$', line_width = 2, color ='yellow', muted_color='grey', muted_alpha=0.2)
-    p2.line(data2.index, data2['Real Middle Band'], legend=stock + ' Real Middle Band', line_width=2, color='lightgreen', muted_color='grey', muted_alpha=0.2)
-    p2.line(data2.index, data2['Real Lower Band'], legend=stock + ' Real Lower Band', line_width=2, color='yellow', muted_color='grey', muted_alpha=0.2)
+    p2.line('x', 'z', legend= stock+' price in $', line_width = 2, color ='blue', muted_color='grey', muted_alpha=0.2, source=source2)
+    p2.line('x', 'bu', legend= stock+' Real Upper Band$', line_width = 2, color ='yellow', muted_color='grey', muted_alpha=0.2, source=source2)
+    p2.line('x', 'bm', legend=stock + ' Real Middle Band', line_width=2, color='lightgreen', muted_color='grey', muted_alpha=0.2, source=source2)
+    p2.line('x', 'bl', legend=stock + ' Real Lower Band', line_width=2, color='yellow', muted_color='grey', muted_alpha=0.2, source =source2)
     p2.legend.location = "top_left"
     p2.legend.click_policy = "mute"
 
     p3.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p3.line(data.index, data['4. close'], legend=stock + ' price in $', line_width=2, color = 'blue')
-    p35.line(data3.index, data3['RSI'], legend= stock+' RSI', line_width = 2, color ='red')
+    p3.line('x', 'z', legend=stock + ' price in $', line_width=2, color = 'blue', source = source3)
+    p35.line('x2', 'rsi', legend= stock+' RSI', line_width = 2, color ='red', source = source3)
     rsi = gridplot([[p3], [p35]])
 
     p4.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p4.line(data.index, data['4. close'], legend=stock + ' price in $', line_width=2, color ='blue', muted_color='grey', muted_alpha=0.2)
-    p45.line(data4.index, data4['MACD'],legend=stock+' MACD', line_width=2, color='green', muted_color='grey', muted_alpha=0.2)
-    p45.line(data4.index, data4['MACD_Signal'], color='orange', legend=stock+' MACD signal', line_width=2, muted_color='grey', muted_alpha=0.2)
+    p4.line('x', 'z', legend=stock + ' price in $', line_width=2, color ='blue', muted_color='grey', muted_alpha=0.2, source= source4)
+    p45.line('x2','macd' ,legend=stock+' MACD', line_width=2, color='green', muted_color='grey', muted_alpha=0.2, source = source4)
+    p45.line('x2', 'macds', color='orange', legend=stock+' MACD signal', line_width=2, muted_color='grey', muted_alpha=0.2, source= source4)
     p45.vbar(x=data4.index, bottom=[ 0 for _ in data4.index], top=data4['MACD_Hist'], width=4, color="purple", legend=stock+' MACD Histagram', line_width=2, muted_color='grey', muted_alpha=0.2)
     p45.legend.location = "top_left"
     p45.legend.click_policy = "mute"
     macd = gridplot([[p4], [p45]])
 
     p5.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
-    p5.line(data.index, data['5. adjusted close'],legend= stock+' price in $', line_width = 2)
+    p5.line('x','y',source=source5,legend= stock+' price in $', line_width = 2)
     p55.line(data.index, data['6. volume'], legend= stock+' Volume', line_width = 2, color ='purple')
     volume = gridplot([[p5], [p55]])
 
+    prediction = pd.read_csv(os.path.join(os.path.dirname(__file__), "templates/predictx/symbols/"+stock+".csv"))
+    days = 0,1 ,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+    pp1 = prediction.iloc[0]['pp']
+    pp2 = prediction.iloc[1]['pp']
+    pp3 = prediction.iloc[2]['pp']
+    pp4 = prediction.iloc[3]['pp']
+    pp5 = prediction.iloc[4]['pp']
+    pp6 = prediction.iloc[5]['pp']
+    pp7 = prediction.iloc[6]['pp']
+    pp8 = prediction.iloc[7]['pp']
+    pp9 = prediction.iloc[8]['pp']
+    pp10 = prediction.iloc[9]['pp']
+    pp11 = prediction.iloc[10]['pp']
+    pp12 = prediction.iloc[11]['pp']
+    pp13 = prediction.iloc[12]['pp']
+    pp14 = prediction.iloc[13]['pp']
+    pp15 = prediction.iloc[14]['pp']
+    pp16 = prediction.iloc[15]['pp']
     p6.line(days,prediction['pp'], legend= stock+' Predicted price in $', line_width = 2)
 
     #Store components
