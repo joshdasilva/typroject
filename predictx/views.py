@@ -19,7 +19,7 @@ import pandas as pd
 import wikipedia, os
 
 def chart(stock, sname, wikiD):
-    API_KEY = 'ZCXPM8FMBJXNOE3J'
+    API_KEY = 'U5HDNUUWSMV4P355'
     ts = TimeSeries(key='API_KEY', output_format='pandas')
     d, meta_data = ts.get_daily_adjusted(symbol=stock, outputsize='full')
 
@@ -203,7 +203,7 @@ def chart(stock, sname, wikiD):
     p1.line('x', 'lsma', legend= stock+' 200 day MA', line_width = 2, color ='red',  muted_color='grey', muted_alpha=0.2, source=source1)
     p1.line('x', 'ssma', legend= stock+' 20 day MA', line_width = 2, color ='yellow',  muted_color='grey', muted_alpha=0.2, source=source1)
     p1.line('x', 'lema', legend= stock+' 200 day EMA', line_width = 2, color ='green',  muted_color='grey', muted_alpha=0.2, source=source1)
-    p1.line('x', 'sema', legend= stock+' 20 day MA', line_width = 2, color ='orange',  muted_color='grey', muted_alpha=0.2, source=source1)
+    p1.line('x', 'sema', legend= stock+' 20 day EMA', line_width = 2, color ='orange',  muted_color='grey', muted_alpha=0.2, source=source1)
     p1.legend.location = "top_left"
     p1.legend.click_policy = "mute"
 
@@ -211,7 +211,7 @@ def chart(stock, sname, wikiD):
     p2.line('x', 'z', legend= stock+' price in $', line_width = 2, color ='blue', muted_color='grey', muted_alpha=0.2, source=source2)
     p2.line('x', 'bu', legend= stock+' Real Upper Band$', line_width = 2, color ='yellow', muted_color='grey', muted_alpha=0.2, source=source2)
     p2.line('x', 'bm', legend=stock + ' Real Middle Band', line_width=2, color='lightgreen', muted_color='grey', muted_alpha=0.2, source=source2)
-    p2.line('x', 'bl', legend=stock + ' Real Lower Band', line_width=2, color='yellow', muted_color='grey', muted_alpha=0.2, source =source2)
+    p2.line('x', 'bl', legend=stock + ' Real Lower Band', line_width=2, color='orange', muted_color='grey', muted_alpha=0.2, source =source2)
     p2.legend.location = "top_left"
     p2.legend.click_policy = "mute"
 
