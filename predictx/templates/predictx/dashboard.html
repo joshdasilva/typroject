@@ -18,8 +18,12 @@
     <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" rel="stylesheet" type="text/css">
     <link href="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.css" rel="stylesheet" type="text/css">
     <!--Fonts Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+
+
 
     {{ script | safe }}
        {{ script1 | safe }}
@@ -60,37 +64,162 @@
                   <li class="nav-item">
                      <a class="nav-link active" href="#">
                      <span data-feather="home"></span>
-                     Favourites  <span class="sr-only">(current)</span>
+                     Symbols List <span class="sr-only">(current)</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
-                     <span data-feather="file"></span>
-                     Apple
+                     <a class="nav-link" href="/AAPL">
+                     Apple Inc.
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
-                     <span data-feather="shopping-cart"></span>
-                     Tesla
+                     <a class="nav-link" href="/MSFT">
+                     Microsoft Corporation
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
-                     <span data-feather="users"></span>
-                     Samsung
+                     <a class="nav-link" href="/AMZN">
+                     Amazon.com Inc.
+                     </a>
+                  </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="/FB">
+                     Facebook Inc.
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
-                     <span data-feather="bar-chart-2"></span>
-                     Walmart
+                     <a class="nav-link" href="/BRK.B">
+                     Berkshire Hathaway Inc.
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
-                     <span data-feather="layers"></span>
-                     Exxon Mobil
+                     <a class="nav-link" href="/GOOG">
+                     Alphabet Inc.
+                     </a>
+                  </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="/XOM">
+                     Exxon Mobil Corporation
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/JPM">
+                     JPMorgan Chase & Co.
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/V">
+                     Visa Inc.
+                     </a>
+                  </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="/BAC">
+                     Bank of America Corp
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/INTC">
+                     Intel Corporation
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/CSCO">
+                     Cisco Systems Inc.
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/VZ">
+                     Verizon Communications Inc.
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/PFE">
+                     Pfizer Inc.
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/T">
+                     AT&T Inc.
+                     </a>
+                  </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="/MA">
+                     Mastercard Incorporated
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/BA">
+                     Boeing Company
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/DIS">
+                     Walt Disney Company
+                     </a>
+                  </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="/KO">
+                     Coca-Cola Company
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/PEP">
+                     PepsiCo Inc.
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/NFLX">
+                     Netflix Inc.
+                     </a>
+                  </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="/MCD">
+                     McDonald's Corporation
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/WMT">
+                     Walmart Inc.
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/ORCL">
+                     Oracle Corporation
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/IBM">
+                     Internation Business Machines Corporation
+                     </a>
+                  </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="/PYPL">
+                     PalPal Holdings Inc
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/MMM">
+                     3M Company
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/NVDA">
+                     Nvidia Corporation
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/NKE">
+                     Nike Inc.
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/COST">
+                     Costco Wholesale Corporation
+                     </a>
+                  </li>
+                     <li class="nav-item">
+                     <a class="nav-link" href="/QCOM">
+                     Qualcomm Incorporated
                      </a>
                   </li>
                </ul>
@@ -99,14 +228,10 @@
          </div>
       </div>
 
-
-
    <body>
    {%block symbol%}
    {% endblock %}
    </body>
-
-
 
     <script>
     function dChanged() {

@@ -7,8 +7,10 @@ app_name = "predictx"
 urlpatterns = [
   #  path('', views.index),
     path("", views.indexpage, name="indexpage"),
+    path("userguide/", views.userguide, name="userguide"),
     path("register/", views.register, name="register"),
     path("login/", views.login_request, name="login"),
+    path("register/", views.register, name="register"),
 
     path("AAPL/", views.AAPL, name="AAPL"),
     path("MSFT/", views.MSFT, name="MSFT"),
@@ -20,7 +22,6 @@ urlpatterns = [
     path("JPM/", views.JPM, name="JPM"),
     path("V/", views.V, name="V"),
     path("BAC/", views.BAC, name="BAC"),
-
     path("INTC/", views.INTC, name="INTC"),
     path("CSCO/", views.CSCO, name="CSCO"),
     path("VZ/", views.VZ, name="VZ"),
@@ -31,7 +32,6 @@ urlpatterns = [
     path("KO/", views.KO, name="KO"),
     path("PEP/", views.PEP, name="PEP"),
     path("NFLX/", views.NFLX, name="NFLX"),
-
     path("MCD/", views.MCD, name="MCD"),
     path("WMT/", views.WMT, name="WMT"),
     path("ORCL/", views.ORCL, name="ORCL"),
@@ -71,10 +71,6 @@ urlpatterns = [
     path("NKE/logout", views.logout_request, name="logout"),
     path("COST/logout", views.logout_request, name="logout"),
     path("QCOM/logout", views.logout_request, name="logout"),
-
-
-
-
 
 ]
 

@@ -62,7 +62,9 @@ body {
   font-size: .75rem;
   text-transform: uppercase;
 }
-
+.bd-example {
+    position: relative;
+}
 /*
  * Content
  */

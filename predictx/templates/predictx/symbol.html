@@ -5,18 +5,29 @@
          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 id="demo" class="h2">Latest Time Series for {{ sname | safe }}</h1>
+                <!---
                <div class="btn-toolbar mb-2 mb-md-0">
                   <div class="btn-group mr-2">
                      <button type="button" class="btn btn-sm btn-outline-secondary">Add to Favorites</button>
                   </div>
                </div>
+                -->
             </div>
       <div class="row">
         <p>
             <div class="d-flex justify-content-center">
                  {{ div | safe }}
             </div>
-          Open: {{ lOpen | safe }}, Close: {{ lClose | safe }}, High: {{ lHigh | safe }}, Low: {{ lLow | safe }}, Adjusted Close: {{ lAdjClose | safe }}, Volume: {{ lVol | safe }}, Divident: {{ lDiv | safe }}, Split: {{ lSplit | safe }}
+            <div class="bd-example">
+                <button type="button" class="btn btn-secondary">Open: {{ lOpen | safe }}</button>
+                <button type="button" class="btn btn-secondary">Close: {{ lClose | safe }}</button>
+                <button type="button" class="btn btn-success">High: {{ lHigh | safe }}</button>
+                <button type="button" class="btn btn-danger">Low: {{ lLow | safe }}</button>
+                <button type="button" class="btn btn-light">Adjusted Close: {{ lAdjClose | safe }}</button>
+                <button type="button" class="btn btn-light">Volume: {{ lVol | safe }}</button>
+                <button type="button" class="btn btn-light">Divident: {{ lDiv | safe }}</button>
+                <button type="button" class="btn btn-light">Split: {{ lSplit | safe }}</button>
+            </div>
         </p>
       </div>
              <div class="col-xs-12" style="height:44px;"></div>
