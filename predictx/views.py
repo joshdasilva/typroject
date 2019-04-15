@@ -67,6 +67,9 @@ def chart(stock, sname, wikiD):
     lSplit = latest.iloc[:, 7:8].values
     lSplit=str(lSplit).lstrip('[').rstrip(']')
 
+    cdata = data.tail(331)
+
+    source0 = ColumnDataSource(data=dict(x=cdata.index, y=cdata['5. adjusted close'], o=cdata['1. open'], h=cdata['2. high'], l=cdata['3. low'],c=cdata['4. close'], vol=cdata['6. volume']))
     source1 = ColumnDataSource(data=dict(x=data.index, y=data['5. adjusted close'], ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
     source2 = ColumnDataSource(data=dict(x = data.index, z=data['4. close'], bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
     source3 = ColumnDataSource(data=dict(x = data.index, z=data['4. close'], rsi = data3['RSI']))
@@ -80,6 +83,18 @@ def chart(stock, sname, wikiD):
         plot_width =1300,
         plot_height =600,
         tools=['pan', 'wheel_zoom', 'box_zoom', 'reset'])
+    p.add_tools(HoverTool(tooltips=[("(Date","@x{%F}"), ("Adjusted Close", "@y{%0.2f}"), ("open", "@o{%0.2f}"), ("high", "@h{%0.2f}"), ("low", "@l{%0.2f}"), ("close", "@c{%0.2f}"), ("Volume", "@vol{%0.2f}")],
+        formatters={
+            'x': 'datetime',
+            'y': 'printf',
+            'o': 'printf',
+            'h': 'printf',
+            'l': 'printf',
+            'c': 'printf',
+            'vol':'printf'
+        },
+        mode='vline')
+    )
 
     p1 = figure(title= title ,
         x_axis_label= 'date',
@@ -187,7 +202,7 @@ def chart(stock, sname, wikiD):
         plot_height =600)
 
 
-    cdata = data.tail(331)
+
     inc = cdata['4. close'] > cdata['1. open']
     dec = cdata['1. open'] > cdata['4. close']
     w = 12 * 60 * 60 * 1000  # half day in ms
@@ -196,6 +211,10 @@ def chart(stock, sname, wikiD):
     p.segment(cdata.index, cdata['2. high'], cdata.index, cdata['3. low'], color="black")
     p.vbar(cdata.index[inc], w, cdata['1. open'][inc], cdata['4. close'][inc], fill_color="#7cfc00", line_color="black")
     p.vbar(cdata.index[dec], w, cdata['1. open'][dec], cdata['4. close'][dec], fill_color="#ff0000", line_color="black")
+    p.line('x', 'y', line_width=2,legend= stock, color='lightgrey', muted_color='grey', muted_alpha=0.2,
+            source=source0)
+    p.legend.location = "top_left"
+    p.legend.click_policy = "mute"
 
 
     p1.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
