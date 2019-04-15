@@ -25,7 +25,6 @@
 
 
 
-
     {{ script | safe }}
        {{ script1 | safe }}
        {{ script2 | safe }}
@@ -43,7 +42,7 @@
             <ul class="navbar-nav mr-auto">
             </ul>
             <form class="form-inline mt-2 mt-md-0">
-                <select class="selectpicker" data-live-search="true" id="mySelect" onchange="dChanged()">
+                <select class="selectpicker" data-live-search="true" id="mySelect" onchange="dChanged()" >
                     {% block content %}
                     {% for stc in stocks %}
                         <option data-tokens="{{stc.stock_name}}">{{stc.stock_title}}</option>
@@ -257,6 +256,68 @@
     </script>
 
 
+<script>
+
+    // Function that does nothing, but prevents default event handler
+function disableLink(e) {
+    e.preventDefault();
+};
+
+window.onload = function() {
+
+    $("#mySelect").attr('disabled',true);
+
+    setTimeout(function() {
+    $("#mySelect").removeAttr("disabled");
+    $('.mySelect').selectpicker('refresh');
+    }, 1000);
+
+    var els = document.getElementsByTagName('a');
+    [].forEach.call(els, function(el, i) {
+        el.addEventListener("click", disableLink);
+    });
+    // Remove it in 5 seconds
+    setTimeout(function() {
+        var els = document.getElementsByTagName('a');
+        [].forEach.call(els, function(el, i) {
+            el.removeEventListener("click", disableLink);
+        });
+    }, 30000);
+};
+
+
+</script>
+
+   <script>
+       function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.text(minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            timer = 0;
+        }
+
+    }, 1000);
+}
+
+jQuery(function ($) {
+    var fiveMinutes = 60 * 0.5,
+        display = $('#time');
+    startTimer(fiveMinutes, display);
+});
+
+
+
+   </script>
+
+
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
@@ -266,5 +327,6 @@
     <script src= "http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
     <script src="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.0.4.min.js"></script>
     <script src="http://cdn.pydata.org/bokeh/release/bokeh-api-1.0.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
 

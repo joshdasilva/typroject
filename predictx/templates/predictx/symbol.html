@@ -2,7 +2,12 @@
 
 {%block symbol%}
 
+
          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+         <div class="align-right">
+            <p>Due to the free API restriction, only one page will be allowed in <span id="time">00:22</span> seconds</p>
+
+        </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 id="demo" class="h2">Latest Time Series for {{ sname | safe }}</h1>
                 <!---
@@ -23,8 +28,7 @@
 
             <div class="row">
                <h2 id="demo2" class="h2">Latest Intraday price for {{ sname | safe }} </h2>
-              </div>
-                     <div class="col-xs-12" style="height:44px;"></div>
+                <div class="col-xs-12" style="height:44px;"></div>
             <div class="bd-example">
                 <button type="button" class="btn btn-secondary">Open: {{ lOpen | safe }}</button>
                 <button type="button" class="btn btn-secondary">Close: {{ lClose | safe }}</button>
@@ -35,6 +39,8 @@
                 <button type="button" class="btn btn-light">Divident: {{ lDiv | safe }}</button>
                 <button type="button" class="btn btn-light">Split: {{ lSplit | safe }}</button>
             </div>
+              </div>
+
         </p>
       </div>
              <div class="col-xs-12" style="height:44px;"></div>
@@ -239,6 +245,8 @@
  </main>
  </div>
 </div>
+
+
 
 	  {% endblock %}
 
