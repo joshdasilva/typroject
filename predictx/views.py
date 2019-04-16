@@ -6,8 +6,6 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .forms import NewUserForm
-from alpha_vantage.timeseries import TimeSeries
-from alpha_vantage.techindicators import TechIndicators
 from math import pi
 from bokeh.layouts import row, column, gridplot
 from bokeh.plotting import figure, output_file, show, curdoc, _figure
@@ -17,64 +15,82 @@ from bokeh.models import DatetimeTickFormatter,HoverTool, ColumnDataSource, Slid
 from pprint import pprint
 import pandas as pd
 import wikipedia, os
+from alphaVantageAPI.alphavantage import AlphaVantage
+
+key = "U5HDNUUWSMV4P355"
+
+AV = AlphaVantage(
+    api_key=key,
+    premium=True,
+    output_size='Full',
+    datatype='json',
+    export=False,
+    export_path='~/av_data',
+    output='csv',
+    clean=False,
+    proxy={}
+)
+
 
 def chart(stock, sname, wikiD):
-    API_KEY = 'U5HDNUUWSMV4P355'
-    ts = TimeSeries(key='API_KEY', output_format='pandas')
-    d, meta_data = ts.get_daily_adjusted(symbol=stock, outputsize='full')
 
-    ts2 = TechIndicators(key='API_KEY', output_format='pandas')
-    d2, meta_data2 = ts2.get_bbands(symbol=stock, interval='daily', time_period=10)
-
-    ts3 = TechIndicators(key='API_KEY', output_format='pandas')
-    d3, meta_data3 = ts3.get_rsi(symbol=stock, series_type = 'close', interval='daily')
-
-    ts4 = TechIndicators(key='API_KEY', output_format='pandas')
-    d4, meta_data4 = ts4.get_macd(symbol=stock,series_type = 'close', interval='daily')
+    d = AV.data(function='DA', symbol=stock)
+    d2 = AV.data(symbol=stock, interval='daily', function='BBANDS', series_type='close', time_period=10)
+    d3 = AV.data(symbol=stock, interval='daily', function='RSI', series_type='close', time_period=20)
+    d4 = AV.data(symbol=stock, interval='daily', function='MACD', series_type='close', time_period=20)
 
     title = 'Latest prices for'+sname
 
-    xi = 5321
-    data = d.tail(xi)
-    data2 = d2.tail(xi)
-    data3 = d3.tail(xi)
-    data4 = d4.tail(xi)
+    ##reshaping the arrays to a fixed length
+    s = 5321
+    data = d.tail(s)
+    data2 = d2.tail(s)
+    data3 = d3.tail(s)
+    data4 = d4.tail(s)
 
-    data.index = pd.to_datetime(data.index)
+    ##candle stick data
+    cdata = data.tail(331)
 
+    #processing date time for candlesticks and regular data
+    cdataindex = cdata['date']
+    dataindex = data['date']
+    cdataindex = pd.to_datetime(cdataindex)
+    dataindex = pd.to_datetime(dataindex)
+
+    ##calculations for 200 day EMA/SMA and 20 day EMA/SMA
     long_rolling = data['5. adjusted close'].rolling(window=200).mean()
     short_rolling = data['5. adjusted close'].rolling(window=20).mean()
     ema_short = data['5. adjusted close'].ewm(span=20, adjust=False).mean()
     ema_long = data['5. adjusted close'].ewm(span=200, adjust=False).mean()
 
-    import numpy as np
-
+    #Latest data
     latest = data.tail(1)
-    lOpen = latest.iloc[:, 0:1].values
+    lOpen = latest.iloc[:, 1:2].values
     lOpen=str(lOpen).lstrip('[').rstrip(']')
-    lHigh = latest.iloc[:, 1:2].values
+    lHigh = latest.iloc[:, 2:3].values
     lHigh=str(lHigh).lstrip('[').rstrip(']')
-    lLow = latest.iloc[:, 2:3].values
+    lLow = latest.iloc[:, 3:4].values
     lLow=str(lLow).lstrip('[').rstrip(']')
-    lClose = latest.iloc[:, 3:4].values
+    lClose = latest.iloc[:, 4:5].values
     lClose=str(lClose).lstrip('[').rstrip(']')
-    lAdjClose = latest.iloc[:, 4:5].values
+    lAdjClose = latest.iloc[:, 5:6].values
     lAdjClose=str(lAdjClose).lstrip('[').rstrip(']')
-    lVol = latest.iloc[:, 5:6].values
+    lVol = latest.iloc[:, 6:7].values
     lVol=str(lVol).lstrip('[').rstrip(']')
-    lDiv = latest.iloc[:, 6:7].values
+    lDiv = latest.iloc[:, 7:8].values
     lDiv=str(lDiv).lstrip('[').rstrip(']')
-    lSplit = latest.iloc[:, 7:8].values
+    lSplit = latest.iloc[:, 8:9].values
     lSplit=str(lSplit).lstrip('[').rstrip(']')
 
-    cdata = data.tail(331)
 
-    source0 = ColumnDataSource(data=dict(x=cdata.index, y=cdata['5. adjusted close'], o=cdata['1. open'], h=cdata['2. high'], l=cdata['3. low'],c=cdata['4. close'], vol=cdata['6. volume']))
-    source1 = ColumnDataSource(data=dict(x=data.index, y=data['5. adjusted close'], ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
-    source2 = ColumnDataSource(data=dict(x = data.index, z=data['4. close'], bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
-    source3 = ColumnDataSource(data=dict(x = data.index, z=data['4. close'], rsi = data3['RSI']))
-    source4 = ColumnDataSource(data=dict(x = data.index, z=data['4. close'], macd=data4['MACD'], macds = data4['MACD_Signal']))
-    source5 = ColumnDataSource(data=dict(x = data.index, y=data['5. adjusted close'],o=data['1. open'],h=data['2. high'],l=data['3. low'],c=data['4. close'], vol=data['6. volume']))
+
+    source0 = ColumnDataSource(data=dict(x=cdataindex, y=cdata['5. adjusted close'], o=cdata['1. open'], h=cdata['2. high'], l=cdata['3. low'],c=cdata['4. close'], vol=cdata['6. volume']))
+
+    source1 = ColumnDataSource(data=dict(x=dataindex, y=data['5. adjusted close'], ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
+    source2 = ColumnDataSource(data=dict(x = dataindex, z= data['4. close'] , bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
+    source3 = ColumnDataSource(data=dict(x = dataindex, z=data['4. close'], rsi = data3['RSI']))
+    source4 = ColumnDataSource(data=dict(x = dataindex, z=data['4. close'], macd=data4['MACD'], macds = data4['MACD_Signal']))
+    source5 = ColumnDataSource(data=dict(x = dataindex, y=data['5. adjusted close'],o=data['1. open'],h=data['2. high'],l=data['3. low'],c=data['4. close'], vol=data['6. volume']))
 
     p = figure(title= title ,
         x_axis_label= 'Date Time',
@@ -208,9 +224,9 @@ def chart(stock, sname, wikiD):
     w = 12 * 60 * 60 * 1000  # half day in ms
     p.xaxis.major_label_orientation = pi / 4
     p.grid.grid_line_alpha = 0.3
-    p.segment(cdata.index, cdata['2. high'], cdata.index, cdata['3. low'], color="black")
-    p.vbar(cdata.index[inc], w, cdata['1. open'][inc], cdata['4. close'][inc], fill_color="#7cfc00", line_color="black")
-    p.vbar(cdata.index[dec], w, cdata['1. open'][dec], cdata['4. close'][dec], fill_color="#ff0000", line_color="black")
+    p.segment(cdataindex, cdata['2. high'], cdataindex, cdata['3. low'], color="black")
+    p.vbar(cdataindex[inc], w, cdata['1. open'][inc], cdata['4. close'][inc], fill_color="#7cfc00", line_color="black")
+    p.vbar(cdataindex[dec], w, cdata['1. open'][dec], cdata['4. close'][dec], fill_color="#ff0000", line_color="black")
     p.line('x', 'y', line_width=2,legend= stock, color='lightgrey', muted_color='grey', muted_alpha=0.2,
             source=source0)
     p.legend.location = "top_left"
@@ -243,7 +259,7 @@ def chart(stock, sname, wikiD):
     p4.line('x', 'z', legend=stock + ' price in $', line_width=2, color ='blue', muted_color='grey', muted_alpha=0.2, source= source4)
     p45.line('x','macd' ,legend=stock+' MACD', line_width=2, color='green', muted_color='grey', muted_alpha=0.2, source = source4) #x2
     p45.line('x', 'macds', color='orange', legend=stock+' MACD signal', line_width=2, muted_color='grey', muted_alpha=0.2, source= source4) #x2
-    p45.vbar(x=data.index, bottom=[ 0 for _ in data.index], top=data4['MACD_Hist'], width=4, color="purple", legend=stock+' MACD Histagram', line_width=2, muted_color='grey', muted_alpha=0.2)#data4.index
+    p45.vbar(x=dataindex, bottom=[ 0 for _ in dataindex], top=data4['MACD_Hist'], width=4, color="purple", legend=stock+' MACD Histagram', line_width=2, muted_color='grey', muted_alpha=0.2)#data4.index
     p45.legend.location = "top_left"
     p45.legend.click_policy = "mute"
     macd = gridplot([[p4], [p45]])
@@ -602,7 +618,7 @@ def ORCL(request):
 def IBM(request):
     if request.user.is_authenticated:
         stock = 'IBM'
-        sname = 'Internation Business Machines Corporation'
+        sname = 'IBM'
         wikiD = wikipedia.summary(sname, sentences=5)
         return chart(stock, sname, wikiD)
     else:
