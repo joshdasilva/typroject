@@ -7,17 +7,21 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 id="demo" class="h2">Latest Time Series for {{ sname | safe }}</h1>
             </div>
+
       <div class="row">
         <p>
             <div class="d-flex justify-content-center">
                  {{ div | safe }}
             </div>
+        </div>
 
            <div class="col-xs-12" style="height:44px;"></div>
 
             <div class="row">
                <h2 id="demo2" class="h2">Latest Intraday price for {{ sname | safe }} </h2>
                 <div class="col-xs-12" style="height:44px;"></div>
+                </div>
+             <div class="row">
             <div class="bd-example">
                 <button type="button" class="btn btn-secondary">Open: {{ lOpen | safe }}</button>
                 <button type="button" class="btn btn-secondary">Close: {{ lClose | safe }}</button>
@@ -28,10 +32,11 @@
                 <button type="button" class="btn btn-light">Divident: {{ lDiv | safe }}</button>
                 <button type="button" class="btn btn-light">Split: {{ lSplit | safe }}</button>
             </div>
-              </div>
+            </div>
+
 
         </p>
-      </div>
+
              <div class="col-xs-12" style="height:44px;"></div>
 
              <div class="row">
