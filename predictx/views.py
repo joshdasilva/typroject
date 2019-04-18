@@ -16,39 +16,30 @@ from pprint import pprint
 import pandas as pd
 import wikipedia, os
 from alphaVantageAPI.alphavantage import AlphaVantage
+from stockstats import StockDataFrame
 
 key = "U5HDNUUWSMV4P355"
 
-AV = AlphaVantage(
-    api_key=key,
-    premium=True,
-    output_size='Full',
-    datatype='json',
-    export=False,
-    export_path='~/av_data',
-    output='csv',
-    clean=False,
-    proxy={}
-)
-
+AV = AlphaVantage(api_key=key,premium=True,output_size='Full',datatype='json',export=False,export_path='~/av_data',output='csv',clean=False,proxy={})
 
 def chart(stock, sname, wikiD):
-
-    d = AV.data(function='DA', symbol=stock)
-    d2 = AV.data(symbol=stock, interval='daily', function='BBANDS', series_type='close', time_period=10)
-    d3 = AV.data(symbol=stock, interval='daily', function='RSI', series_type='close', time_period=20)
-    d4 = AV.data(symbol=stock, interval='daily', function='MACD', series_type='close', time_period=20)
-
+    #set title for all graphs
     title = 'Latest prices for'+sname
 
-    ##reshaping the arrays to a fixed length
-    s = 5321
-    data = d.tail(s)
-    data2 = d2.tail(s)
-    data3 = d3.tail(s)
-    data4 = d4.tail(s)
+    data = AV.data(function='DA', symbol=stock)
+    #intd= AV.intraday(symbol=stock, stock=60)
+    data2 = AV.data(symbol=stock, interval='daily', function='BBANDS', series_type='close', time_period=20)
+    data3 = AV.data(symbol=stock, interval='daily', function='RSI', series_type='close', time_period=20)
+    data4 = AV.data(symbol=stock, interval='daily', function='MACD', series_type='close', time_period=20)
 
-    ##candle stick data
+    #reshaping the arrays to a fixed length
+    s = 5321
+    data = data.tail(s)
+    data2 = data2.tail(s)
+    data3 = data3.tail(s)
+    data4 = data4.tail(s)
+
+    #candle stick data
     cdata = data.tail(331)
 
     #processing date time for candlesticks and regular data
@@ -57,11 +48,42 @@ def chart(stock, sname, wikiD):
     cdataindex = pd.to_datetime(cdataindex)
     dataindex = pd.to_datetime(dataindex)
 
-    ##calculations for 200 day EMA/SMA and 20 day EMA/SMA
-    long_rolling = data['5. adjusted close'].rolling(window=200).mean()
-    short_rolling = data['5. adjusted close'].rolling(window=20).mean()
-    ema_short = data['5. adjusted close'].ewm(span=20, adjust=False).mean()
-    ema_long = data['5. adjusted close'].ewm(span=200, adjust=False).mean()
+    #processed data
+    adjClose = data['5. adjusted close']
+    close = data['4. close']
+
+    #calculations for 200 day EMA/SMA and 20 day EMA/SMA
+    long_rolling = adjClose.rolling(window=200).mean()
+    short_rolling = adjClose.rolling(window=20).mean()
+    ema_short = adjClose.ewm(span=20, adjust=False).mean()
+    ema_long = adjClose.ewm(span=200, adjust=False).mean()
+
+    # #bollinger bands calculation
+    # data2['Real Middle Band'] = data['5. adjusted close'].rolling(window=20).mean()
+    # stddev = data['5. adjusted close'].rolling(window=20).std()
+    # data2['Real Upper Band'] = data2['Real Middle Band'] + (stddev*2)
+    # data2['Real Lower Band'] = data2['Real Middle Band'] - (stddev*2)
+
+    #calculation for RSI inspired from Stackoverflow user's Moots answer availble at :https://stackoverflow.com/questions/20526414/relative-strength-index-in-python-pandas
+    # length = 20
+    # delta = adjClose.diff()
+    # delta = delta[1:]
+    # up, down = delta.copy(), delta.copy()
+    # up[up < 0.0] = 0.0
+    # down[down > 0.0] = 0.0
+    #
+    # # Calculate the EWMA
+    # roll_up1 = up.ewm(com=(length - 1), min_periods=length).mean()
+    # roll_down1 = down.abs().ewm(com=(length - 1), min_periods=length).mean()
+    #
+    # #Calculate the RSI based on EWMA
+    # RS1 = roll_up1 / roll_down1
+    # RSI1 = 100.0 - (100.0 / (1.0 + RS1))
+    #calculation for MACD
+    # emaa = StockDataFrame.retype(adjClose)
+    # emaa['macd'] = emaa.get('macd')  # calculate MACD
+    # emaa['ema12'] = adjClose.ewm(span=12, adjust=False).mean
+    # emaa['ema26'] = adjClose.ewm(span=26, adjust=False).mean
 
     #Latest data
     latest = data.tail(1)
@@ -82,15 +104,12 @@ def chart(stock, sname, wikiD):
     lSplit = latest.iloc[:, 8:9].values
     lSplit=str(lSplit).lstrip('[').rstrip(']')
 
-
-
     source0 = ColumnDataSource(data=dict(x=cdataindex, y=cdata['5. adjusted close'], o=cdata['1. open'], h=cdata['2. high'], l=cdata['3. low'],c=cdata['4. close'], vol=cdata['6. volume']))
-
-    source1 = ColumnDataSource(data=dict(x=dataindex, y=data['5. adjusted close'], ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
-    source2 = ColumnDataSource(data=dict(x = dataindex, z= data['4. close'] , bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
-    source3 = ColumnDataSource(data=dict(x = dataindex, z=data['4. close'], rsi = data3['RSI']))
-    source4 = ColumnDataSource(data=dict(x = dataindex, z=data['4. close'], macd=data4['MACD'], macds = data4['MACD_Signal']))
-    source5 = ColumnDataSource(data=dict(x = dataindex, y=data['5. adjusted close'],o=data['1. open'],h=data['2. high'],l=data['3. low'],c=data['4. close'], vol=data['6. volume']))
+    source1 = ColumnDataSource(data=dict(x=dataindex, y=adjClose, ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
+    source2 = ColumnDataSource(data=dict(x = dataindex, z= close , bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
+    source3 = ColumnDataSource(data=dict(x = dataindex, z=close, rsi = data3['RSI']))
+    source4 = ColumnDataSource(data=dict(x = dataindex, z=close, macd=data4['MACD'], macds = data4['MACD_Signal']))
+    source5 = ColumnDataSource(data=dict(x = dataindex, y=adjClose,o=data['1. open'],h=data['2. high'],l=data['3. low'],c=close, vol=data['6. volume']))
 
     p = figure(title= title ,
         x_axis_label= 'Date Time',
@@ -304,19 +323,9 @@ def chart(stock, sname, wikiD):
              ,'script6' : script6 , 'div6' : div6, 'wiki': wikiD,'sname':sname, "stocks":Stock.objects.all,'pp1':pp1,'pp2':pp2,'pp3':pp3,'pp4':pp4,'pp5':pp5,'pp6':pp6,'pp7':pp7,'pp8':pp8,'pp9':pp9,'pp10':pp10,'pp11':pp11,'pp12':pp12,'pp13':pp13,'pp14':pp14,'pp15':pp15,'pp16':pp16,
              'lHigh': lHigh,'lLow': lLow,'lClose': lClose,'lAdjClose': lAdjClose,'lVol': lVol,'lDiv': lDiv,'lSplit': lSplit,'lOpen': lOpen })
 
-def AlphaVantage(symbol):
-    api_key=open('alpha.txt','r').read()
-    ts = TimeSeries(key=api_key, output_format='pandas')
-    data, meta_data = ts.get_intraday(symbol=symbol,interval='60min', outputsize='full')
-    AlphaVantage('MSFT')
 
 def indexpage(request):
     return render(request, 'predictx/index.html')
-
-# def indexpage(request):
-#     return render(request = request,
-#                   template_name='predictx/index.html',
-#                   context = {"stocks":Stock.objects.all})
 
 def logout_request(request):
     logout(request)
