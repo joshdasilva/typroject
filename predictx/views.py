@@ -276,8 +276,8 @@ def chart(stock, sname, wikiD):
 
     p4.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
     p4.line('x', 'z', legend=stock + ' price in $', line_width=2, color ='blue', muted_color='grey', muted_alpha=0.2, source= source4)
-    p45.line('x','macd' ,legend=stock+' MACD', line_width=2, color='green', muted_color='grey', muted_alpha=0.2, source = source4) #x2
-    p45.line('x', 'macds', color='orange', legend=stock+' MACD signal', line_width=2, muted_color='grey', muted_alpha=0.2, source= source4) #x2
+    p45.line('x','macd' ,legend=stock+' MACD', line_width=2, color='orange', muted_color='grey', muted_alpha=0.2, source = source4) #x2
+    p45.line('x', 'macds', color='green', legend=stock+' MACD signal', line_width=2, muted_color='grey', muted_alpha=0.2, source= source4) #x2
     p45.vbar(x=dataindex, bottom=[ 0 for _ in dataindex], top=data4['MACD_Hist'], width=4, color="purple", legend=stock+' MACD Histagram', line_width=2, muted_color='grey', muted_alpha=0.2)#data4.index
     p45.legend.location = "top_left"
     p45.legend.click_policy = "mute"
@@ -369,7 +369,6 @@ def register(request):
             return render(request = request,
                           template_name = "predictx/register.html",
                           context={"form":form})
-
     form = NewUserForm
     return render(request = request,
                   template_name = "predictx/register.html",
