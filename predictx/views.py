@@ -635,7 +635,7 @@ def IBM(request):
 def PYPL(request):
     if request.user.is_authenticated:
         stock = 'PYPL'
-        sname = 'PalPal Holdings Inc.'
+        sname = 'Paypal'
         wikiD = wikipedia.summary(sname, sentences=5)
         return chart(stock, sname, wikiD)
     else:
