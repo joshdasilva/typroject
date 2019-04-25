@@ -25,7 +25,6 @@ Pillow==6.0.0
 post==2018.11.20
 public==2018.11.20
 pydotplus==2.0.2
-pygal==2.4.0
 pyparsing==2.3.1
 python-dateutil==2.8.0
 python-dotenv==0.10.1

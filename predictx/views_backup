@@ -1,15 +1,18 @@
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, render_to_response
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Stock
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 from .forms import NewUserForm
 from math import pi
-from bokeh.layouts import gridplot
-from bokeh.plotting import figure
+from bokeh.layouts import row, column, gridplot
+from bokeh.plotting import figure, output_file, show, curdoc, _figure
 from bokeh.embed import components
-from bokeh.models import DatetimeTickFormatter,HoverTool, ColumnDataSource,BasicTickFormatter
+from bokeh.driving import count
+from bokeh.models import DatetimeTickFormatter,HoverTool, ColumnDataSource, Slider, Select, BasicTickFormatter
+from pprint import pprint
 import pandas as pd
 import wikipedia, os
 from alphaVantageAPI.alphavantage import AlphaVantage
@@ -23,12 +26,18 @@ def chart(stock, sname, wikiD):
     #set title for all graphs
     title = 'Latest prices for'+sname
 
-    #get data
     data = AV.data(function='DA', symbol=stock)
+    #intd= AV.intraday(symbol=stock, stock=60)
+    data2 = AV.data(symbol=stock, interval='daily', function='BBANDS', series_type='close', time_period=20)
+    data3 = AV.data(symbol=stock, interval='daily', function='RSI', series_type='close', time_period=20)
+    data4 = AV.data(symbol=stock, interval='daily', function='MACD', series_type='close', time_period=20)
 
     #reshaping the arrays to a fixed length
     s = 5321
     data = data.tail(s)
+    data2 = data2.tail(s)
+    data3 = data3.tail(s)
+    data4 = data4.tail(s)
 
     #candle stick data
     cdata = data.tail(331)
@@ -49,33 +58,32 @@ def chart(stock, sname, wikiD):
     ema_short = adjClose.ewm(span=20, adjust=False).mean()
     ema_long = adjClose.ewm(span=200, adjust=False).mean()
 
-    #bollinger bands calculation
-    midBand= data['5. adjusted close'].rolling(window=20).mean()
-    stddev = data['5. adjusted close'].rolling(window=20).std()
-    upBand = midBand + (stddev*2)
-    lowBand = midBand - (stddev*2)
+    # #bollinger bands calculation
+    # data2['Real Middle Band'] = data['5. adjusted close'].rolling(window=20).mean()
+    # stddev = data['5. adjusted close'].rolling(window=20).std()
+    # data2['Real Upper Band'] = data2['Real Middle Band'] + (stddev*2)
+    # data2['Real Lower Band'] = data2['Real Middle Band'] - (stddev*2)
 
     #calculation for RSI inspired from Stackoverflow user's Moots answer availble at :https://stackoverflow.com/questions/20526414/relative-strength-index-in-python-pandas
-    length = 20
-    delta = adjClose.diff()
-    delta = delta[1:]
-    up, down = delta.copy(), delta.copy()
-    up[up < 0.0] = 0.0
-    down[down > 0.0] = 0.0
-
-    # Calculate the EWMA
-    roll_up1 = up.ewm(com=(length - 1), min_periods=length).mean()
-    roll_down1 = down.abs().ewm(com=(length - 1), min_periods=length).mean()
-
-    #Calculate the RSI based on EWMA
-    RS1 = roll_up1 / roll_down1
-    RSI1 = 100.0 - (100.0 / (1.0 + RS1))
-
+    # length = 20
+    # delta = adjClose.diff()
+    # delta = delta[1:]
+    # up, down = delta.copy(), delta.copy()
+    # up[up < 0.0] = 0.0
+    # down[down > 0.0] = 0.0
+    #
+    # # Calculate the EWMA
+    # roll_up1 = up.ewm(com=(length - 1), min_periods=length).mean()
+    # roll_down1 = down.abs().ewm(com=(length - 1), min_periods=length).mean()
+    #
+    # #Calculate the RSI based on EWMA
+    # RS1 = roll_up1 / roll_down1
+    # RSI1 = 100.0 - (100.0 / (1.0 + RS1))
     #calculation for MACD
-    emaa = StockDataFrame.retype(adjClose)
-    macd = emaa.get('macd')  # calculate MACD
-    macd12 = adjClose.ewm(span=12, adjust=False).mean
-    macd26 = adjClose.ewm(span=26, adjust=False).mean
+    # emaa = StockDataFrame.retype(adjClose)
+    # emaa['macd'] = emaa.get('macd')  # calculate MACD
+    # emaa['ema12'] = adjClose.ewm(span=12, adjust=False).mean
+    # emaa['ema26'] = adjClose.ewm(span=26, adjust=False).mean
 
     #Latest data
     latest = data.tail(1)
@@ -96,12 +104,6 @@ def chart(stock, sname, wikiD):
     lSplit = latest.iloc[:, 8:9].values
     lSplit=str(lSplit).lstrip('[').rstrip(']')
 
-    data2 = AV.data(symbol=stock, interval='daily', function='BBANDS', series_type='close', time_period=20)
-    data3 = AV.data(symbol=stock, interval='daily', function='RSI', series_type='close', time_period=20)
-    data4 = AV.data(symbol=stock, interval='daily', function='MACD', series_type='close', time_period=20)
-    data2 = data2.tail(s)
-    data3 = data3.tail(s)
-    data4 = data4.tail(s)
     source0 = ColumnDataSource(data=dict(x=cdataindex, y=cdata['5. adjusted close'], o=cdata['1. open'], h=cdata['2. high'], l=cdata['3. low'],c=cdata['4. close'], vol=cdata['6. volume']))
     source1 = ColumnDataSource(data=dict(x=dataindex, y=adjClose, ssma=short_rolling, lsma=long_rolling, sema=ema_short,lema=ema_long))
     source2 = ColumnDataSource(data=dict(x = dataindex, z= close , bu=data2['Real Upper Band'], bm=data2['Real Middle Band'], bl=data2['Real Lower Band']))
@@ -374,6 +376,34 @@ def register(request):
 
 def userguide(request):
     return render(request, 'predictx/userguide.html')
+
+
+# def favorite_stock(request, id):
+#     stock = get_object_or_404(Stock,id=id)
+#     if stock.favorite.filter(id=request.user.id).exists():
+#         stock.favorite.remove(request.user)
+#     else:
+#         stock.favorite.add(request.user)
+#     return HttpResponseRedirect(stock.get_absolute_url())
+#
+# def stock_favorite_list(request):
+#     user = request.user
+#     favorite_stocks = user.favorite.all()
+#     context = {
+#         'favorite_stocks': favorite_stocks
+#     }
+#     return render(request, 'predictx/symbol.html', context)
+#
+# def stock_detail(request, id):
+#     stock = get_object_or_404(Stock, id=id)
+#     is_favourite=False
+#     if stock.favorite.filter(id=request.user.id).exists():
+#         is_favourite=True
+#
+#     context = {
+#         ' is_favourite': is_favourite
+#     }
+#     return render(request, 'predictx/symbol.html', context)
 
 
 def MSFT(request):
