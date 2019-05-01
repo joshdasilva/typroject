@@ -139,8 +139,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predictx/views_backup">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+            <state relative-caret-position="255">
+              <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -465,7 +465,7 @@
       <workItem from="1556106345072" duration="260000" />
       <workItem from="1556106740085" duration="24000" />
       <workItem from="1556109752186" duration="704000" />
-      <workItem from="1556143112222" duration="6798000" />
+      <workItem from="1556143112222" duration="7425000" />
     </task>
     <task id="LOCAL-00001" summary="mega update">
       <created>1552956220640</created>
@@ -478,7 +478,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="359789000" />
+    <option name="totallyTimeSpent" value="360416000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -491,14 +491,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.14818764" />
       <window_info id="Structure" order="1" sideWeight="0.5005417" side_tool="true" weight="0.124200426" />
       <window_info id="Favorites" order="2" sideWeight="0.5005417" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32932165" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7073561" visible="true" weight="0.2751896" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7073561" weight="0.2751896" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -784,8 +783,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/predictx/views_backup">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+        <state relative-caret-position="255">
+          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
         </state>
       </provider>
     </entry>
