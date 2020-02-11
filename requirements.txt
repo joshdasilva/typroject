@@ -4,7 +4,7 @@ beautifulsoup4==4.7.1
 bokeh==1.0.4
 certifi==2018.11.29
 chardet==3.0.4
-Django==2.1.7
+Django==2.2.10
 django-crispy-forms==1.7.2
 django-extensions==2.1.6
 djangorestframework==3.9.2
