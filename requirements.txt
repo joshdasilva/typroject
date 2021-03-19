@@ -7,7 +7,7 @@ chardet==3.0.4
 Django==2.1.7
 django-crispy-forms==1.7.2
 django-extensions==2.1.6
-djangorestframework==3.9.2
+djangorestframework==3.11.2
 extensions==0.4
 get==2018.11.19
 graphviz==0.10.1
