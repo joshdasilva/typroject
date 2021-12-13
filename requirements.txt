@@ -15,7 +15,7 @@ gunicorn==19.9.0
 idna==2.8
 int-date==0.1.8
 Jinja2==2.10
-lxml==4.3.3
+lxml==4.6.5
 MarkupSafe==1.1.1
 numpy==1.16.2
 packaging==19.0
